@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 
 const SkypeBot = require('./skypebot');
 const SkypeBotConfig = require('./skypebotconfig');
-const process=require("./app.json");
+//const process=require("./app.json");
 
 const REST_PORT = (process.env.PORT || 5000);
 
