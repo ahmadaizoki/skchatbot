@@ -7,20 +7,20 @@
   "env": {
     "APIAI_ACCESS_TOKEN": {
       "description": "Client access token for Api.ai",
-      "value": "5b440dd9729d4f599de38ef1c6f1a648"
+      "value": ""
     },
     "APIAI_LANG": {
       "description": "Agent language",
-      "value": "fr",
+      "value": "en",
       "required": false
     },
     "APP_ID": {
       "description": "Microsoft App ID",
-      "value": "0949d2cf-5a65-43b0-898d-7fa4fd20ec42"
+      "value": ""
     },
     "APP_SECRET": {
       "description": "Microsoft App Password",
-      "value": "ZLYampdzMTNHiyKnvzAfUFQ"
+      "value": ""
     }
   },
   "engines": {

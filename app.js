@@ -6,15 +6,15 @@ const bodyParser = require('body-parser');
 
 const SkypeBot = require('./skypebot');
 const SkypeBotConfig = require('./skypebotconfig');
-//const proces=require("./app.json");
+const config=require('./config');
 
 const REST_PORT = (process.env.PORT || 5000);
 
 const botConfig = new SkypeBotConfig(
-    process.env.APIAI_ACCESS_TOKEN,
-    process.env.APIAI_LANG,
-    process.env.APP_ID,
-    process.env.APP_SECRET
+    config.APIAI_ACCESS_TOKEN,
+    config.APIAI_LANG,
+    config.APP_ID,
+    config.APP_SECRET
 );
 
 const skypeBot = new SkypeBot(botConfig);
