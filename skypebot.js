@@ -131,6 +131,8 @@ module.exports = class SkypeBot {
                         } else {
                             responses = text;
                         }
+                    }else{
+                        responses=responseText;
                     }
 
                     if (SkypeBot.isDefined(responseMessages) && responseMessages.length > 0) {
