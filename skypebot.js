@@ -122,24 +122,9 @@ module.exports = class SkypeBot {
 
         for (let messageIndex = 0; messageIndex < messages.length; messageIndex++) {
             let message = messages[messageIndex];
-
-            switch (message.type) {
-                //message.type 0 means text message
-                case 0:
-                    {
-
-                        if (SkypeBot.isDefined(message.speech)) {
-                            //session.send(message.speech);
-                            session.send("ahmad");
-                        }
-
-                    }
-
-                    break;
-
-                default:
-
-                    break;
+            if (SkypeBot.isDefined(message.speech)) {
+                //session.send(message.speech);
+                session.send("ahmad");
             }
         }
 
