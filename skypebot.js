@@ -120,12 +120,12 @@ module.exports = class SkypeBot {
 
     doRichContentResponse(session, messages) {
 
-        for (let messageIndex = 0; messageIndex < messages.length; messageIndex++) {
-            let message = messages[messageIndex];
+        //for (let messageIndex = 0; messageIndex < messages.length; messageIndex++) {
+          //  let message = messages[messageIndex];
             //if (SkypeBot.isDefined(message.speech)) {
                 //session.send(message.speech);
                 session.send("ahmad");
-        }
+        //}
 
     }
 
