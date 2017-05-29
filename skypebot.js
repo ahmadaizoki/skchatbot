@@ -103,7 +103,7 @@ module.exports = class SkypeBot {
                     pg.connect(process.env.DATABASE_URL, function (err, client) {
                         if (err) throw err;
                         client
-                            .query(`SELECT projet FROM projet WHERE projet = 'Room' LIMIT 1`)
+                            .query(`SELECT projet FROM projet WHERE projet = 'Room'`)
                             .on('row', function (row) {
                                 rows.push(row);
                             })
