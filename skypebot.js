@@ -232,17 +232,15 @@ module.exports = class SkypeBot {
             // SQL Query > Select Data
             const query = client.query('SELECT projet FROM projet;');
         // Stream results back one row at a time
-        query.on('row', (row) = > {
-            results.push(row);
-    })
-        ;
+            query.on('row', (row) = > {
+                results.push(row);
+            });
         // After all data is returned, close connection and return results
-        query.on('end', () = > {
-            done();
+            query.on('end', () = > {
+                done();
+            };
         console.log(results[0].projet);
         text1 = text + results[0].projet;
-    })
-        ;
         return text1;
     })
         ;
