@@ -200,6 +200,7 @@ module.exports = class SkypeBot {
                     }
 
                     if (SkypeBot.isDefined(responseMessages) && responseMessages.length > 0) {
+                        console.log('dfs');
                         this.doRichContentResponse(session,text1);
                     } else if (SkypeBot.isDefined(responseText)) {
                         console.log(sender, 'Response as text message');
