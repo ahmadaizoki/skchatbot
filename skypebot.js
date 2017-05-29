@@ -243,7 +243,7 @@ module.exports = class SkypeBot {
         text1 = text + results[0].projet;
     })
         ;
-        return res.send(text1);
+        return text1;
     })
         ;
     }
