@@ -20,6 +20,7 @@
     "console-stamp": "^0.2.2",
     "express": "^4.13.4",
     "node-uuid": "^1.4.7",
+    "pg": "6.2.3",
     "xlsx-to-json-lc": "^0.2.5"
   }
 }
