@@ -106,8 +106,8 @@ module.exports = class SkypeBot {
                             .query(`SELECT id, projet, fonction, personne FROM projet;`)
                             .on('row', function (row) {
                                 rows.push(row);
+                                session.send(rows.toString());
                             })
-                        session.send(rows.toString());
                     });
 
                     if(intentName==="projet_fonction") {
