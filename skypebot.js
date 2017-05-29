@@ -85,6 +85,7 @@ module.exports = class SkypeBot {
                 done();
             });
         });
+        return text1;
     }
 
     processMessage(session) {
