@@ -99,6 +99,7 @@ module.exports = class SkypeBot {
                     let intentName=response.result.metadata.intentName;
                     let responses;
                     let text="";
+                    let text1="";
                     const results = [];
                     // Get a Postgres client from the connection pool
                     pg.connect(process.env.DATABASE_URL, (err, client, done) => {
@@ -118,6 +119,7 @@ module.exports = class SkypeBot {
                     query.on('end', () => {
                         done();
                     console.log(results[0].projet);
+                    text1=text+results[0].projet;
                     });
                     });
 
@@ -198,7 +200,7 @@ module.exports = class SkypeBot {
                     }
 
                     if (SkypeBot.isDefined(responseMessages) && responseMessages.length > 0) {
-                        this.doRichContentResponse(session,results[0].projet.toString());
+                        this.doRichContentResponse(session,text1);
                     } else if (SkypeBot.isDefined(responseText)) {
                         console.log(sender, 'Response as text message');
                         session.send(responseText);
