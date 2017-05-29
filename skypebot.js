@@ -121,7 +121,6 @@ module.exports = class SkypeBot {
                         console.log(results[0].projet);
                         text1=text+results[0].projet;
                         });
-                        return text1;
                         session.send(text1);
                     });
 
