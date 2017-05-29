@@ -3,6 +3,8 @@
 const apiai = require('apiai');
 const uuid = require('node-uuid');
 const botbuilder = require('botbuilder');
+const pg=require('pg');
+pg.defaults.ssl=true;
 
 module.exports = class SkypeBot {
 
@@ -97,6 +99,15 @@ module.exports = class SkypeBot {
                     let intentName=response.result.metadata.intentName;
                     let responses;
                     let text="";
+                    pg.connect(process.env.DATABASE_URL, function (err, client) {
+                        if (err) throw err;
+                        let rows = [];
+                        client
+                            .query(`SELECT projet FROM projet WHERE projet = 'Room' LIMIT 1`)
+                            .on('row', function (row) {
+                                rows.push(row);
+                            })
+                    });
 
                     if(intentName==="projet_fonction") {
                         let fonction;
@@ -174,7 +185,7 @@ module.exports = class SkypeBot {
                     }
 
                     if (SkypeBot.isDefined(responseMessages) && responseMessages.length > 0) {
-                        this.doRichContentResponse(session,responses);
+                        this.doRichContentResponse(session,row);
                     } else if (SkypeBot.isDefined(responseText)) {
                         console.log(sender, 'Response as text message');
                         session.send(responseText);
