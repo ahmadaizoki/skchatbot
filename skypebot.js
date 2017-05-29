@@ -102,13 +102,12 @@ module.exports = class SkypeBot {
                     let rows=[];
                     pg.connect(process.env.DATABASE_URL, function (err, client) {
                         if (err) throw err;
-                        rows=client
-                            .query(`SELECT personne FROM projet WHERE fonction='Test Lead';`)
-                            /*.on('row', function (row) {
+                        client
+                            .query(`SELECT id, projet, fonction, personne FROM projet;`)
+                            .on('row', function (row) {
                                 rows.push(row);
-                            })*/
+                            })
                     });
-                    let re=rows.toString();
 
                     if(intentName==="projet_fonction") {
                         let fonction;
@@ -186,7 +185,7 @@ module.exports = class SkypeBot {
                     }
 
                     if (SkypeBot.isDefined(responseMessages) && responseMessages.length > 0) {
-                        this.doRichContentResponse(session,re);
+                        this.doRichContentResponse(session,rows.toString());
                     } else if (SkypeBot.isDefined(responseText)) {
                         console.log(sender, 'Response as text message');
                         session.send(responseText);
