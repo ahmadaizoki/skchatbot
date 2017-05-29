@@ -99,12 +99,28 @@ module.exports = class SkypeBot {
                     let intentName=response.result.metadata.intentName;
                     let responses;
                     let text="";
-                    let rows=[];
-                    pg.connect(process.env.DATABASE_URL, function (err, client) {
-                        if (err) throw err;
-                        console.log(client
-                            .query(`SELECT id, projet, fonction, personne FROM projet`));
+                    const results = [];
+                    // Get a Postgres client from the connection pool
+                    pg.connect(process.env.DATABASE_URL, (err, client, done) => {
+                        // Handle connection errors
+                        if(err) {
+                            done();
+                            console.log(err);
+                            return res.status(500).json({success: false, data: err});
+                        }
+                        // SQL Query > Select Data
+                        const query = client.query('SELECT * FROM projet;');
+                    // Stream results back one row at a time
+                    query.on('row', (row) => {
+                        results.push(row);
                     });
+                    // After all data is returned, close connection and return results
+                    query.on('end', () => {
+                        done();
+                    console.log(results);
+                    });
+                    });
+
 
                     if(intentName==="projet_fonction") {
                         let fonction;
@@ -182,10 +198,10 @@ module.exports = class SkypeBot {
                     }
 
                     if (SkypeBot.isDefined(responseMessages) && responseMessages.length > 0) {
-                        this.doRichContentResponse(session,rows.toString());
+                        this.doRichContentResponse(session,responses);
                     } else if (SkypeBot.isDefined(responseText)) {
                         console.log(sender, 'Response as text message');
-                        session.send(rows.toString());
+                        session.send(responseText);
 
                     } else {
                         console.log(sender, 'Received empty speech');
