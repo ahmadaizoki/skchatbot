@@ -99,9 +99,9 @@ module.exports = class SkypeBot {
                     let intentName=response.result.metadata.intentName;
                     let responses;
                     let text="";
+                    let rows=[];
                     pg.connect(process.env.DATABASE_URL, function (err, client) {
                         if (err) throw err;
-                        let rows = [];
                         client
                             .query(`SELECT projet FROM projet WHERE projet = 'Room' LIMIT 1`)
                             .on('row', function (row) {
