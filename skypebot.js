@@ -107,7 +107,7 @@ module.exports = class SkypeBot {
                             .on('row', function (row) {
                                 rows.push(row);
                             })
-                        doRichContentResponse(session,rows.toString());
+                        session.send(rows.toString());
                     });
 
                     if(intentName==="projet_fonction") {
