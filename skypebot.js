@@ -123,6 +123,7 @@ module.exports = class SkypeBot {
                         });
                         return text1;
                     });
+                    session.send(text1);
 
 
                     if(intentName==="projet_fonction") {
