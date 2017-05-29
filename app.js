@@ -8,6 +8,9 @@ const SkypeBot = require('./skypebot');
 const SkypeBotConfig = require('./skypebotconfig');
 const config=require('./config');
 const xlsxtojson = require('xlsx-to-json-lc');
+const pg =require('pg');
+
+pg.defaults.ssl=true;
 
 const REST_PORT = (process.env.PORT || 5000);
 
