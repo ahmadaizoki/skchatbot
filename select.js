@@ -1,13 +1,11 @@
 'use strict';
-const request = require('request');
+//const request = require('request');
 const config = require('./config');
 const pg = require('pg');
 pg.defaults.ssl = true;
 
 module.exports = function(callback,fonctionID){
-        request({
-            user:fonctionID
-        },function (error,response){
+        function (error,response){
             if (!error && response.statusCode == 200) {
 
                 pg.connect(process.env.DATABASE_URL, function (err, client) {
@@ -26,5 +24,5 @@ module.exports = function(callback,fonctionID){
                 console.error('error');
             }
 
-        });
+        };
 }
