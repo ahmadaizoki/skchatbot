@@ -101,17 +101,22 @@ module.exports = class SkypeBot {
                     let text="";
                     let text1="";
 
-                    pg.connect(process.env.DATABASE_URL, function (err, client) {
-                        if (err) throw err;
-                        let results=[];
-                        client
-                            .query(`SELECT personne FROM projet`)
-                            .on('row',function (row) {
-                            text1=results.push(row);
-                            console.log(results);
-                            });
-                        console.log("resulta "+results);
-                    });
+                     //noinspection JSAnnotator
+                    function selPer(callback) {
+                        pg.connect(process.env.DATABASE_URL, function (err, client) {
+                            if (err) throw err;
+                            let results=[];
+                            client
+                                .query(`SELECT personne FROM projet`)
+                                .on('row',function (row) {
+                                    text1=results.push(row);
+                                    console.log(results);
+                                })callback(client);
+                            console.log("resulta "+results);
+                        });
+
+                    }
+
 
 
                     if(intentName==="projet_fonction") {
