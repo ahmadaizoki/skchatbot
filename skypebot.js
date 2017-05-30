@@ -241,10 +241,8 @@ module.exports = class SkypeBot {
             console.log(results[0].projet);
             text1=text1+results[0].projet;
             });
+        callback=results.toString();
         });
-        per=text1;
-        console.log(per);
-        callback=text1;
         return callback;
     }
 
