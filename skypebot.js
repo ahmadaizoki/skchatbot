@@ -242,7 +242,8 @@ module.exports = class SkypeBot {
         });
         per=text1;
         console.log(per);
-        callback(per);
+        callback=text1;
+        return callback;
     }
 
 }
