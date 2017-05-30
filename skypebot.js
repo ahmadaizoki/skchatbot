@@ -231,7 +231,7 @@ module.exports = class SkypeBot {
                 // Do something with `rows` and `fields` and assign a value to ret.
 
                 callback(null, ret);
-                console.log(ret +"resulta");
+                console.log(ret.rows +"resulta");
             });
         });
     }
