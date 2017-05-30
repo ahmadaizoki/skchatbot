@@ -15,7 +15,7 @@ module.exports = function(callback,fonctionID){
                         .on('row',function (row) {
                             text1=results.push(row);
                             console.log(results);
-                        });
+                        })
                     callback(fonctionID);
                     console.log("resulta "+results);
                 });
