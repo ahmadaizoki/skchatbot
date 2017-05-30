@@ -110,6 +110,7 @@ module.exports = class SkypeBot {
                             text1=results.push(row);
                             console.log(results);
                             });
+                        console.log("resulta "+results);
                     });
 
 
