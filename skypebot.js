@@ -99,9 +99,8 @@ module.exports = class SkypeBot {
                     let intentName=response.result.metadata.intentName;
                     let responses;
                     let text="";
-                    let callback;
-                    let toto=this.selectPersonne(responseText,callback);
-                    console.log(toto);
+
+                    console.log(selectPersonne(handleResult()));
 
                     if(intentName==="projet_fonction") {
                         let fonction;
@@ -218,36 +217,34 @@ module.exports = class SkypeBot {
         return obj != null;
     }
 
-    selectPersonne(per,callback){
-        let text1="";
-        const results = [];
-        // Get a Postgres client from the connection pool
-        pg.connect(process.env.DATABASE_URL, (err, client, done) => {
-            // Handle connection errors
-            if(err) {
-                done();
-                console.log(err);
-                return res.status(500).json({success: false, data: err});
-            }
-            // SQL Query > Select Data
-            const query = client.query('SELECT * FROM projet;');
-        // Stream results back one row at a time
-            query.on('row', (row) => {
-                results.push(row);
-                //console.log(results);
-                text1=text1+results[0].projet;
-                console.log("haha"+text1);
+    function selectPersonne(callback){
+        var ret;
+        pg.connect(process.env.DATABASE_URL, function (err, client) {
+            if (err) throw err;
+            client.query("SELECT * from projet", function (err, rows, fields) {
+                if (err) {
+                    // You must `return` in this branch to avoid using callback twice.
+                    return callback(err);
+                }
+
+                // Do something with `rows` and `fields` and assign a value to ret.
+
+                callback(null, ret);
             });
-        // After all data is returned, close connection and return results
-            query.on('end', () => {
-                done();
-                console.log(text1);
-            });
-            console.log(text1);
-            callback=text1;
-            return callback;
-        });
-        console.log(text1+"exterieure");
+        }
     }
+    function handleResult(err, result) {
+        if (err) {
+            // Just an example. You may want to do something with the error.
+            console.error(err.stack || err.message);
+
+            // You should return in this branch, since there is no result to use
+            // later and that could cause an exception.
+            return;
+        }
+
+        // All your logic with the result.
+    }
+
 
 }
