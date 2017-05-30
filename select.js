@@ -4,7 +4,7 @@ const config = require('./config');
 const pg = require('pg');
 pg.defaults.ssl = true;
 
-module.exports = function(callback,fonctionID) {
+module.exports = (callback,fonctionID) {
     var user = fonctionID;
     pg.connect(process.env.DATABASE_URL, function (err, client) {
         if (err) throw err;
