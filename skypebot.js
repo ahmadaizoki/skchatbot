@@ -100,7 +100,7 @@ module.exports = class SkypeBot {
                     let responses;
                     let text="";
                     let text1="";
-                    function(callback,per){
+                    ,function(callback,per){
                         const results = [];
                         // Get a Postgres client from the connection pool
                         pg.connect(process.env.DATABASE_URL, (err, client, done) => {
