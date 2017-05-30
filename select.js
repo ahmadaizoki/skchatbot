@@ -4,7 +4,7 @@ const config = require('./config');
 const pg = require('pg');
 pg.defaults.ssl = true;
 
-module.exports = selectPer(callback,fonctionID){
+module.exports = function(callback,fonctionID){
         request({
             user:fonctionID
         },function (err,response,body){
