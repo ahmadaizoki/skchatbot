@@ -7,7 +7,7 @@ pg.defaults.ssl = true;
 module.exports = function(callback,fonctionID){
         request({
             user:fonctionID
-        },function (err,response,body){
+        },function (error,response,body){
             if (!error && response.statusCode == 200) {
 
                 pg.connect(process.env.DATABASE_URL, function (err, client) {
