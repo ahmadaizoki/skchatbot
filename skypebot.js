@@ -121,7 +121,6 @@ module.exports = class SkypeBot {
                         console.log(results[0].projet);
                         text1=text+results[0].projet;
                         });
-                        session.send(text1);
                     });
 
 
@@ -201,7 +200,9 @@ module.exports = class SkypeBot {
                     }
 
                     if (SkypeBot.isDefined(responseMessages) && responseMessages.length > 0) {
-                        this.doRichContentResponse(session,text1);
+                        console.log(results[0].projet);
+                        console.log("salut");
+                        this.doRichContentResponse(session,responses);
                     } else if (SkypeBot.isDefined(responseText)) {
                         console.log(sender, 'Response as text message');
                         session.send(responseText);
