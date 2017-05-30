@@ -99,6 +99,7 @@ module.exports = class SkypeBot {
                     let intentName=response.result.metadata.intentName;
                     let responses;
                     let text="";
+                    selectPersonne(responseText,callback);
 
                     if(intentName==="projet_fonction") {
                         let fonction;
