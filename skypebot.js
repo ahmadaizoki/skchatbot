@@ -100,28 +100,33 @@ module.exports = class SkypeBot {
                     let responses;
                     let text="";
                     let text1="";
-                    const results = [];
-                    // Get a Postgres client from the connection pool
-                    pg.connect(process.env.DATABASE_URL, (err, client, done) => {
-                        // Handle connection errors
-                        if(err) {
-                            done();
-                            console.log(err);
-                            return res.status(500).json({success: false, data: err});
-                        }
-                        // SQL Query > Select Data
-                        const query = client.query('SELECT projet FROM projet;');
+                    function(callback,per){
+                        const results = [];
+                        // Get a Postgres client from the connection pool
+                        pg.connect(process.env.DATABASE_URL, (err, client, done) => {
+                            // Handle connection errors
+                            if(err) {
+                                done();
+                                console.log(err);
+                                return res.status(500).json({success: false, data: err});
+                            }
+                            // SQL Query > Select Data
+                            const query = client.query('SELECT projet FROM projet;');
                         // Stream results back one row at a time
                         query.on('row', (row) => {
                             results.push(row);
-                        });
+                    });
                         // After all data is returned, close connection and return results
                         query.on('end', () => {
                             done();
                         console.log(results[0].projet);
                         text1=text+results[0].projet;
-                        });
                     });
+                    });
+                        callback(apiaiRequest);
+                        per=text1;
+                        console.log(per);
+                    }
 
 
                     if(intentName==="projet_fonction") {
