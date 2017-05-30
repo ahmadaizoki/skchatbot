@@ -238,11 +238,11 @@ module.exports = class SkypeBot {
         // After all data is returned, close connection and return results
             query.on('end', () => {
                 done();
-            console.log(results[0].projet);
             text1=text1+results[0].projet;
             });
-        callback=results.toString();
-        return callback;
+            console.log(text1);
+            callback=results.toString();
+            return callback;
         });
     }
 
