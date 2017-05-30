@@ -100,7 +100,7 @@ module.exports = class SkypeBot {
                     let responses;
                     let text="";
 
-                    console.log(selectPersonne(handleResult()));
+                    console.log(fetchGameList(handleResult()));
 
                     if(intentName==="projet_fonction") {
                         let fonction;
@@ -217,7 +217,7 @@ module.exports = class SkypeBot {
         return obj != null;
     }
 
-    function selectPersonne(callback){
+    function fetchGameList(callback){
         var ret;
         pg.connect(process.env.DATABASE_URL, function (err, client) {
             if (err) throw err;
