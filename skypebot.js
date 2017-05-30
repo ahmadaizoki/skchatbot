@@ -100,7 +100,7 @@ module.exports = class SkypeBot {
                     let responses;
                     let text="";
 
-                    console.log(selectPersonne(handleResult()));
+                    console.log(this.selectPersonne(handleResult()));
 
                     if(intentName==="projet_fonction") {
                         let fonction;
@@ -200,6 +200,7 @@ module.exports = class SkypeBot {
             console.log('Empty message');
         }
     }
+
 
     doRichContentResponse(session, messages) {
         session.send(messages);
