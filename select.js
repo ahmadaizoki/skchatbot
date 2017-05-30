@@ -17,8 +17,7 @@ module.exports = function(callback,fonctionID){
                             console.log(results);
                         });
                     console.log("resulta "+results);
-                })
-                callback(null,fonctionID);
+                });
             }else {
                 console.error('error');
             }
