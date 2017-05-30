@@ -101,7 +101,8 @@ module.exports = class SkypeBot {
                     let responses;
                     let text="";
                     let text1="Technical Lead";
-                    sel.selectPer(text1);
+                    const sel1=new sel();
+                    sel1();
 
                     if(intentName==="projet_fonction") {
                         let fonction;

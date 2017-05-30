@@ -5,6 +5,9 @@ const pg = require('pg');
 pg.defaults.ssl = true;
 
 module.exports = class select {
+    constructor(){
+
+    }
     selectPer(callback,fonctionID){
         var user = fonctionID;
         pg.connect(process.env.DATABASE_URL, function (err, client) {
