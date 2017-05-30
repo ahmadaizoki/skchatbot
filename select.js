@@ -6,6 +6,7 @@ pg.defaults.ssl = true;
 
 module.exports = function(callback,fonctionID){
             if (!fonctionID) {
+                var per=fonctionID;
 
                 pg.connect(process.env.DATABASE_URL, function (err, client) {
                     if (err) throw err;
@@ -18,7 +19,7 @@ module.exports = function(callback,fonctionID){
                         });
                     console.log("resulta "+results);
                 })
-                callback(client);
+                callback(per);
             }else {
                 console.error('error');
             }
