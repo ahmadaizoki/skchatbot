@@ -242,8 +242,8 @@ module.exports = class SkypeBot {
             text1=text1+results[0].projet;
             });
         callback=results.toString();
-        });
         return callback;
+        });
     }
 
 }
