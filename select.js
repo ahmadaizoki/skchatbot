@@ -7,7 +7,7 @@ pg.defaults.ssl = true;
 module.exports = function(callback,fonctionID) {
     pg.connect(process.env.DATABASE_URL, function (err, client) {
         if (err) throw err;
-        var user = JSON.parse(body);
+        var user = fonctionID;
         let results=[];
         client
             .query(`SELECT personne FROM projet WHERE fonction='${fonctionID}'`)
