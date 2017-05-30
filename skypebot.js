@@ -216,7 +216,8 @@ module.exports = class SkypeBot {
 
         return obj != null;
     }
-    function selectPersonne(per,callback){
+
+    selectPersonne(per,callback){
         let text1="";
         const results = [];
         // Get a Postgres client from the connection pool
