@@ -34,7 +34,7 @@ module.exports = function(fonctionID){
     var db = pgp(process.env.DATABASE_URL);
 
     function getPersonne(req, res, next) {
-        db.any('SELECT personne FROM projet WHERE fonction='${fonctionID}'')
+        db.any('SELECT personne FROM projet WHERE fonction=${fonctionID}')
             .then(function (data) {
                 res.status(200)
                     .json({
