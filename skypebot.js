@@ -216,7 +216,7 @@ module.exports = class SkypeBot {
 
         return obj != null;
     }
-function selectPer(callback,per){
+    function selectPersonne(per,callback){
         let text1="";
         const results = [];
         // Get a Postgres client from the connection pool
@@ -230,19 +230,19 @@ function selectPer(callback,per){
             // SQL Query > Select Data
             const query = client.query('SELECT projet FROM projet;');
         // Stream results back one row at a time
-        query.on('row', (row) => {
-            results.push(row);
-    });
+            query.on('row', (row) => {
+                results.push(row);
+            });
         // After all data is returned, close connection and return results
-        query.on('end', () => {
-            done();
-        console.log(results[0].projet);
-        text1=text+results[0].projet;
-    });
-    });
-        callback(apiaiRequest);
+            query.on('end', () => {
+                done();
+            console.log(results[0].projet);
+            text1=text+results[0].projet;
+            });
+        });
         per=text1;
         console.log(per);
+        callback(per);
     }
 
 }
