@@ -101,20 +101,7 @@ module.exports = class SkypeBot {
                     let responses;
                     let text="";
                     let text1="Technical Lead";
-                    sel(text1);
-
-                    pg.connect(process.env.DATABASE_URL, function (err, client) {
-                        if (err) throw err;
-                        let results=[];
-                        client
-                            .query(`SELECT personne FROM projet`)
-                            .on('row',function (row) {
-                            text1=results.push(row);
-                            console.log(results);
-                            });
-                        console.log("resulta "+results);
-                    });
-
+                    sel.selectPer(text1);
 
                     if(intentName==="projet_fonction") {
                         let fonction;
@@ -231,36 +218,5 @@ module.exports = class SkypeBot {
 
         return obj != null;
     }
-
-    selectPersonne(callback){
-        var ret;
-        pg.connect(process.env.DATABASE_URL, function (err, client) {
-            if (err) throw err;
-            client.query("SELECT * from projet", function (err, rows, fields) {
-                if (err) {
-                    // You must `return` in this branch to avoid using callback twice.
-                    return callback(err);
-                }
-
-                // Do something with `rows` and `fields` and assign a value to ret.
-
-                callback(null, ret);
-                console.log(rows +"resulta");
-            });
-        });
-    }
-    handleResult(err, result) {
-        if (err) {
-            // Just an example. You may want to do something with the error.
-            console.error(err.stack || err.message);
-
-            // You should return in this branch, since there is no result to use
-            // later and that could cause an exception.
-            return;
-        }
-
-        // All your logic with the result.
-    }
-
 
 }
