@@ -240,6 +240,7 @@ module.exports = class SkypeBot {
         // After all data is returned, close connection and return results
             query.on('end', () => {
                 done();
+                console.log(text1);
             });
             console.log(text1);
             callback=text1;
