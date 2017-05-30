@@ -231,7 +231,7 @@ module.exports = class SkypeBot {
 
                 callback(null, ret);
             });
-        }
+        });
     }
     handleResult(err, result) {
         if (err) {
