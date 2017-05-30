@@ -247,6 +247,7 @@ module.exports = class SkypeBot {
             callback=text1;
             return callback;
         });
+        console.log(text1+"exterieure");
     }
 
 }
