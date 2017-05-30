@@ -5,8 +5,7 @@ const pg = require('pg');
 pg.defaults.ssl = true;
 
 module.exports = function(callback,fonctionID){
-        function (error,response){
-            if (!error && response.statusCode == 200) {
+            if (!fonctionID) {
 
                 pg.connect(process.env.DATABASE_URL, function (err, client) {
                     if (err) throw err;
@@ -23,6 +22,4 @@ module.exports = function(callback,fonctionID){
             }else {
                 console.error('error');
             }
-
-        };
 }
