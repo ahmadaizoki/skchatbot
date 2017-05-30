@@ -16,5 +16,5 @@ module.exports = function(callback,fonctionID) {
             });
         console.log("resulta "+results);
     })
-    callback(fonctionID);
+    callback(client);
 }
