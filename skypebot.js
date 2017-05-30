@@ -3,6 +3,7 @@
 const apiai = require('apiai');
 const uuid = require('node-uuid');
 const botbuilder = require('botbuilder');
+const sel=require('./select');
 const pg=require('pg');
 pg.defaults.ssl=true;
 
@@ -99,24 +100,20 @@ module.exports = class SkypeBot {
                     let intentName=response.result.metadata.intentName;
                     let responses;
                     let text="";
-                    let text1="";
+                    let text1="Technical Lead";
+                    sel(text1);
 
-                     //noinspection JSAnnotator
-                    function selPer(callback) {
-                        pg.connect(process.env.DATABASE_URL, function (err, client) {
-                            if (err) throw err;
-                            let results=[];
-                            client
-                                .query(`SELECT personne FROM projet`)
-                                .on('row',function (row) {
-                                    text1=results.push(row);
-                                    console.log(results);
-                                })callback(client);
-                            console.log("resulta "+results);
-                        });
-
-                    }
-
+                    pg.connect(process.env.DATABASE_URL, function (err, client) {
+                        if (err) throw err;
+                        let results=[];
+                        client
+                            .query(`SELECT personne FROM projet`)
+                            .on('row',function (row) {
+                            text1=results.push(row);
+                            console.log(results);
+                            });
+                        console.log("resulta "+results);
+                    });
 
 
                     if(intentName==="projet_fonction") {
