@@ -100,7 +100,7 @@ module.exports = class SkypeBot {
                     let responses;
                     let text="";
 
-                    console.log(this.selectPersonne(this.handleResult()));
+                    console.log(this.selectPersonne(this.handleResult));
 
                     if(intentName==="projet_fonction") {
                         let fonction;
