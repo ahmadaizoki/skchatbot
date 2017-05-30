@@ -100,7 +100,7 @@ module.exports = class SkypeBot {
                     let responses;
                     let text="";
 
-                    console.log(fetchGameList(handleResult()));
+                    console.log(selectPersonne(handleResult()));
 
                     if(intentName==="projet_fonction") {
                         let fonction;
@@ -217,7 +217,7 @@ module.exports = class SkypeBot {
         return obj != null;
     }
 
-    function fetchGameList(callback){
+    selectPersonne(callback){
         var ret;
         pg.connect(process.env.DATABASE_URL, function (err, client) {
             if (err) throw err;
@@ -233,7 +233,7 @@ module.exports = class SkypeBot {
             });
         }
     }
-    function handleResult(err, result) {
+    handleResult(err, result) {
         if (err) {
             // Just an example. You may want to do something with the error.
             console.error(err.stack || err.message);
