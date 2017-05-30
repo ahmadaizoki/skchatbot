@@ -234,7 +234,7 @@ module.exports = class SkypeBot {
         // Stream results back one row at a time
             query.on('row', (row) => {
                 results.push(row);
-                console.log(results);
+                //console.log(results);
                 text1=text1+results.toString();
             });
         // After all data is returned, close connection and return results
