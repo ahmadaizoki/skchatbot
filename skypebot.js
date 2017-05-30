@@ -176,8 +176,6 @@ module.exports = class SkypeBot {
                     }
 
                     if (SkypeBot.isDefined(responseMessages) && responseMessages.length > 0) {
-                        console.log(text1);
-                        console.log("salut");
                         this.doRichContentResponse(session,responses);
                     } else if (SkypeBot.isDefined(responseText)) {
                         console.log(sender, 'Response as text message');
