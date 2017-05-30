@@ -15,5 +15,6 @@ module.exports = function(callback,fonctionID) {
                 console.log(results);
             });
         console.log("resulta "+results);
-    })callback(fonctionID);
+    })
+    callback(fonctionID);
 }
