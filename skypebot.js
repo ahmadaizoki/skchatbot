@@ -102,8 +102,9 @@ module.exports = class SkypeBot {
 
                     pg.connect(process.env.DATABASE_URL, function (err, client) {
                         if (err) throw err;
+                        let results=[];
                         client.query(`SELECT personne FROM projet`,function (err, rows, fields) {
-                            console.log(rows[0]+" haha");
+                            console.log(rows.rows[0]+" haha");
                         });
                     });
 
