@@ -235,12 +235,14 @@ module.exports = class SkypeBot {
             query.on('row', (row) => {
                 results.push(row);
                 console.log(results);
+                text1=text1+results.toString();
             });
         // After all data is returned, close connection and return results
             query.on('end', () => {
                 done();
             });
-            callback=results.toString();
+            console.log(text1);
+            callback=text1;
             return callback;
         });
     }
