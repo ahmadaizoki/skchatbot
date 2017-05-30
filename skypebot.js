@@ -108,7 +108,7 @@ module.exports = class SkypeBot {
                             .query(`SELECT personne FROM projet`)
                             .on('row',function (row) {
                             text1=results.push(row);
-                            console.log(text1);
+                            console.log(results);
                             });
                     });
 
