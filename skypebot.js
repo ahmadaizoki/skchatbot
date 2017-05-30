@@ -237,7 +237,7 @@ module.exports = class SkypeBot {
             query.on('end', () => {
                 done();
             console.log(results[0].projet);
-            text1=text+results[0].projet;
+            text1=text1+results[0].projet;
             });
         });
         per=text1;
