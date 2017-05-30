@@ -9,6 +9,7 @@ pg.defaults.ssl=true;
 
 module.exports = class SkypeBot {
 
+
     get apiaiService() {
         return this._apiaiService;
     }
@@ -67,6 +68,9 @@ module.exports = class SkypeBot {
     }
 
     processMessage(session) {
+        let text1="Test Lead";
+        const sel1=new sel();
+        sel1.selectPer(text1);
 
         let messageText = session.message.text;
         let sender = session.message.address.conversation.id;
@@ -100,9 +104,6 @@ module.exports = class SkypeBot {
                     let intentName=response.result.metadata.intentName;
                     let responses;
                     let text="";
-                    let text1="Technical Lead";
-                    const sel1=new sel();
-                    sel1();
 
                     if(intentName==="projet_fonction") {
                         let fonction;
