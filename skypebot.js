@@ -235,7 +235,7 @@ module.exports = class SkypeBot {
             query.on('row', (row) => {
                 results.push(row);
                 //console.log(results);
-                text1=text1+results.toString();
+                text1=text1+results[0].projet;
             });
         // After all data is returned, close connection and return results
             query.on('end', () => {
