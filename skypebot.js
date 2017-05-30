@@ -104,7 +104,7 @@ module.exports = class SkypeBot {
                         if (err) throw err;
                         let results=[];
                         client.query(`SELECT personne FROM projet`);
-                        clientt.on('row',function (row) {
+                        client.on('row',function (row) {
                             results.push(row);
                             console.log(results);
 
