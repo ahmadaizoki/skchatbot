@@ -234,12 +234,12 @@ module.exports = class SkypeBot {
         // Stream results back one row at a time
             query.on('row', (row) => {
                 results.push(row);
+                console.log(results);
             });
         // After all data is returned, close connection and return results
             query.on('end', () => {
                 done();
             });
-            console.log(results);
             callback=results.toString();
             return callback;
         });
