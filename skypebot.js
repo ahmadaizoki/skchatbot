@@ -102,7 +102,7 @@ module.exports = class SkypeBot {
                     let responses;
                     let text="";
                     let text1="Test Lead";
-                    sel.selectPer(text1);
+                    sel(text1);
 
                     if(intentName==="projet_fonction") {
                         let fonction;
