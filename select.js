@@ -18,15 +18,20 @@ module.exports = function(fonctionID){
     db.any(`SELECT personne FROM projet WHERE fonction='${fonctionID}'`)
         .then(data => {
             text=data;
-            fs.writeFile('./file1',data,function (err) {
-                if(err) {
-                    return console.log(err);
-                }
+            fs.readFile('./file1.json', 'utf-8', function(err, data1) {
+                if (err) throw err
 
-                console.log("The file was saved!");
+                var arrayOfObjects = JSON.parse(data1)
+                arrayOfObjects.users.push(data)
 
-            });
-            console.log(data);
+                console.log(arrayOfObjects)
+
+                fs.writeFile('./users.json', JSON.stringify(arrayOfObjects), 'utf-8', function(err) {
+                    if (err) throw err
+                    console.log('Done!')
+                })
+            })
+            //console.log(data);
         })
         .catch(error =>{
             console.log('ERROR:', error);

@@ -99,9 +99,9 @@ module.exports = class SkypeBot {
                     let responses;
                     let text="";
                     let text1="Test Lead";
+                    sel(text1);
 
                     if(intentName==="projet_fonction") {
-                        sel(text1);
 
                         let fonction;
                         let projet;
@@ -136,8 +136,6 @@ module.exports = class SkypeBot {
                             responses = text;
                         }
                     }else if(intentName==="projet"){
-                        var js=require('./file1');
-                        console.log(js);
                         let projet;
                         let projet1=response.result.parameters.projet1;
                         let projet2=response.result.parameters.projet2;
