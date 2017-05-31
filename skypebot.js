@@ -107,6 +107,7 @@ module.exports = class SkypeBot {
                         // Get content from file
                         var contents = fs.readFileSync("file1.json");
                         console.log("\n *Middle* \n");
+                        console.log(contents);
                         // Define to JSON type
                         var jsonContent = JSON.parse(contents);
                         console.log("\n *FIN* \n");
