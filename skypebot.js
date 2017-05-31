@@ -102,8 +102,6 @@ module.exports = class SkypeBot {
 
                     if(intentName==="projet_fonction") {
                         sel(text1);
-                        var js=require('./file1');
-                        console.log(js.anonymous.personne);
 
                         let fonction;
                         let projet;
@@ -138,6 +136,8 @@ module.exports = class SkypeBot {
                             responses = text;
                         }
                     }else if(intentName==="projet"){
+                        var js=require('./file1');
+                        console.log(js);
                         let projet;
                         let projet1=response.result.parameters.projet1;
                         let projet2=response.result.parameters.projet2;
