@@ -43,9 +43,9 @@ module.exports = function(fonctionID){
                         message: 'Retrieved Personne'
                     });
             })
-            .catch(function (err) {
+            /*.catch(function (err) {
                 return next(err);
-            });
+            })*/;
         console.log(res);
     }
     getPersonne();
