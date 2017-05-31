@@ -24,6 +24,7 @@ module.exports = function(fonctionID){
             jsonfile.writeFile(file, data, function (err) {
                 console.error(err)
                 console.log(data);
+                console.log(file);
             })
         })
         .catch(error =>{
