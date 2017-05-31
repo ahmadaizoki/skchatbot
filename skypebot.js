@@ -125,9 +125,9 @@ module.exports = class SkypeBot {
                                         message: 'Retrieved Personne'
                                     });
                             })
-                        .catch(function (err) {
+                        /*.catch(function (err) {
                          return next(err);
-                         });
+                         });*/
                     }
 
                     if(intentName==="projet_fonction") {
