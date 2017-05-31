@@ -17,12 +17,12 @@ module.exports = function(fonctionID){
     let text="";
     db.any(`SELECT personne FROM projet WHERE fonction='${fonctionID}'`)
         .then(data => {
-            text=data;
+            text=data.toString();
             fs.readFile('./file1.json', 'utf-8', function(err, data1) {
                 if (err) throw err
 
                 var arrayOfObjects = JSON.parse(data1)
-                arrayOfObjects.users.push(data)
+                arrayOfObjects.users.push(text)
 
                 console.log(arrayOfObjects)
 
