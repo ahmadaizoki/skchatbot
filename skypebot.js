@@ -116,14 +116,14 @@ module.exports = class SkypeBot {
                     //sel(text1);
                     getPersonne(text1);
                     var js=require('./file1.json');
-                    console.log(js[0].projet+" la premiere valeure");
+                    console.log(js+" la premiere valeure");
                     //noinspection JSAnnotator
                     function getPersonne(req,res,next,fonctionID) {
                         var fs = require('fs');
                         let list=[];
                         db.any('SELECT * FROM projet')
                             .then(data => {
-                                fs.writeFile('./file1',data.toJSON(),function (err) {
+                                fs.writeFile('./file1',data,function (err) {
                                     if(err) {
                                         return console.log(err);
                                     }
