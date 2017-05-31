@@ -113,8 +113,9 @@ module.exports = class SkypeBot {
                     let text="";
                     let text1="Test Lead";
                     //sel(text1);
+                    getPersonne(text1);
                     var db = pgp(process.env.DATABASE_URL);
-                    function getPersonne(req,res,next) {
+                    function getPersonne(req,res,next,fonctionID) {
                         db.any(`SELECT personne FROM projet WHERE fonction='${fonctionID}'`,[true])
                             .then(function (data) {
                                 res.status(200)
