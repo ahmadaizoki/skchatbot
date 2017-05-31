@@ -117,11 +117,11 @@ module.exports = class SkypeBot {
                     console.log(getPersonne(text1)+" hello");
                     function getPersonne(req,res,next,fonctionID) {
                         db.any('SELECT * FROM projet')
-                            .then(function (data) {
+                            .then(data => {
                                 console.log(data);
-                                res=data;
-                                console.log(res);
-                                return res;
+                            })
+                            .catch(error =>{
+                                console.log('ERROR:', error);
                             });
                     }
 
