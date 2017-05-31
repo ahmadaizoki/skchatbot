@@ -123,7 +123,7 @@ module.exports = class SkypeBot {
                         let list=[];
                         db.any('SELECT * FROM projet')
                             .then(data => {
-                                fs.writeFile('./file1',data,function (err) {
+                                fs.writeFile('./file1',data.toJSON(),function (err) {
                                     if(err) {
                                         return console.log(err);
                                     }
