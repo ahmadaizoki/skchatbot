@@ -116,9 +116,11 @@ module.exports = class SkypeBot {
                     //sel(text1);
                     console.log(getPersonne(text1)+" hello");
                     function getPersonne(req,res,next,fonctionID) {
+                        var fs = require('fs');
                         let list=[];
                         db.any('SELECT * FROM projet')
                             .then(data => {
+                                fs.writeFile('./file1',data);
                                 console.log(list);
                                 list=data;
                                 session.send('Ahmad');
