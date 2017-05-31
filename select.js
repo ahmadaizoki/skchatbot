@@ -15,6 +15,7 @@ var db=pgp(process.env.DATABASE_URL);
 module.exports = function(projetID,fonctionID){
     var fs = require('fs');
     let text="";
+    console.log(projetID,fonctionID)
     db.any(`SELECT personne FROM projet WHERE fonction='${fonctionID}' AND projet='${projetID}'`)
         .then(data => {
             var jsonfile = require('jsonfile')

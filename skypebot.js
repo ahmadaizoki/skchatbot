@@ -124,6 +124,7 @@ module.exports = class SkypeBot {
                             projet = projet1 + " " + projet2 + " " + projet3;
                         }
                         sel(projet,fonction);
+                        console(projet,fonction);
                     }
 
                     if(intentName==="projet_fonction") {
