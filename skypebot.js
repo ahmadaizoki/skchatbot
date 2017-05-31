@@ -15,6 +15,7 @@ var options = {
     promiseLib: promise
 };
 var pgp = require('pg-promise')(options);
+var db=pgp(process.env.DATABASE_URL);
 pg.defaults.ssl=true;
 
 module.exports = class SkypeBot {
@@ -114,9 +115,8 @@ module.exports = class SkypeBot {
                     let text1="Test Lead";
                     //sel(text1);
                     getPersonne(text1);
-                    var db = pgp(process.env.DATABASE_URL);
                     function getPersonne(req,res,next,fonctionID) {
-                        db.any(`SELECT personne FROM projet WHERE fonction='${fonctionID}'`,[true])
+                        db.any(`SELECT personne FROM projet WHERE fonction='${fonctionID}'`)
                             .then(function (data) {
                                 res.status(200)
                                     .json({
