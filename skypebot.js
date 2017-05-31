@@ -123,7 +123,9 @@ module.exports = class SkypeBot {
                         } else {
                             projet = projet1 + " " + projet2 + " " + projet3;
                         }
-                        sel(projet,fonction);
+                        let text1="Test Lead";
+                        let text2="Room";
+                        sel(text1,text2);
                         console.log(projet);
                         console.log(fonction);
                     }
