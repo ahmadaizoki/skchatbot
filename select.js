@@ -36,8 +36,7 @@ module.exports = function(fonctionID){
     function getPersonne(req, res, next) {
         db.any(`SELECT personne FROM projet WHERE fonction='${fonctionID}'`,[true])
             .then(function (data) {
-                //res.status(200)
-                json({
+                res.json({
                     status: 'success',
                     data: data,
                     message: 'Retrieved Personne'
