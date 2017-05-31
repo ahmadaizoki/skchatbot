@@ -18,7 +18,7 @@ module.exports = function(fonctionID){
     db.any(`SELECT personne FROM projet WHERE fonction='${fonctionID}'`)
         .then(data => {
             text=data;
-            fs.writeFile('./file1',text,function (err) {
+            fs.writeFile('./file1',data,function (err) {
                 if(err) {
                     return console.log(err);
                 }
