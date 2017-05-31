@@ -128,9 +128,9 @@ module.exports = class SkypeBot {
 
                     if(intentName==="projet_fonction") {
 
-                        var exjson=require('./file1.json');
-                        for (var i in exjson){
-                            text=text+exjson[i].personne+" ";
+                        var dbjson=require('./file1.json');
+                        for (var i in dbjson){
+                            text=text+dbjson[i].personne+" ";
                         }
                         if (text === "") {
                             responses = "Vous pouvez préciser votre question?";
