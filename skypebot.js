@@ -121,6 +121,7 @@ module.exports = class SkypeBot {
                             .then(data => {
                                 console.log(list);
                                 list=data;
+                                session.send('Ahmad');
 
                             })
                             .catch(error =>{
