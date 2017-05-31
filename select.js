@@ -36,16 +36,17 @@ module.exports = function(fonctionID){
     function getPersonne(req, res, next) {
         db.any(`SELECT personne FROM projet WHERE fonction='${fonctionID}'`,[true])
             .then(function (data) {
-                res.json({
+                /*res.js({
                     status: 'success',
                     data: data,
                     message: 'Retrieved Personne'
-                });
+                });*/
+                console.log(data);
             })
             /*.catch(function (err) {
                 return next(err);
             })*/;
-        console.log(res);
+        //console.log(res);
     }
     getPersonne();
 
