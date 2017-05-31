@@ -1,12 +1,7 @@
 'use strict';
-//const request = require('request');
 const config = require('./config');
 const pg = require('pg');
 var promise = require('bluebird');
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-var multer = require('multer');
 
 pg.defaults.ssl = true;
 var options = {
@@ -14,48 +9,24 @@ var options = {
     promiseLib: promise
 };
 var pgp = require('pg-promise')(options);
+var db=pgp(process.env.DATABASE_URL);
 
 
-module.exports = function(req,res,fonctionID){
-           /* if (!fonctionID) {
-                var per=fonctionID;
+module.exports = function(fonctionID){
+    var fs = require('fs');
+    db.any(`SELECT personne FROM projet WHERE fonction='${fonctionID}'`)
+        .then(data => {
+            fs.writeFile('./file1',data,function (err) {
+                if(err) {
+                    return console.log(err);
+                }
 
-                pg.connect(process.env.DATABASE_URL, function (err, client) {
-                    if (err) throw err;
-                    let results=[];
-                    client
-                        .query(`SELECT personne FROM projet WHERE fonction='${fonctionID}'`)
-                        .on('row',function (row) {
-                            text1=results.push(row);
-                            console.log(results);
-                        });
-                    console.log("resulta "+results);
-                })
-                callback(select);
-            }else {
-                console.error('error');
-            }*/
-    var db = pgp(process.env.DATABASE_URL);
-        let list=[];
-        db.any(`SELECT personne FROM projet WHERE fonction='${fonctionID}'`,[true])
-            .then(function (data) {
-                /*res.js({
-                    status: 'success',
-                    data: data,
-                    message: 'Retrieved Personne'
-                });*/
-                //console.log(data);
-                //list=data;
-                res.JSON(data);
-            })
-            /*.catch(function (err) {
-                return next(err);
-            })*/;
-            list=res;
-            console.log(list+" enfin");
+                console.log("The file was saved!");
 
-        //console.log(res);
-
-
-
+            });
+            console.log(data);
+        })
+        .catch(error =>{
+            console.log('ERROR:', error);
+        });
 }

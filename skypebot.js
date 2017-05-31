@@ -3,23 +3,9 @@
 const apiai = require('apiai');
 const uuid = require('node-uuid');
 const botbuilder = require('botbuilder');
-const sel=require('./select');
-const pg=require('pg');
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-var multer = require('multer');
-var promise = require('bluebird');
-var options = {
-    // Initialization Options
-    promiseLib: promise
-};
-var pgp = require('pg-promise')(options);
-var db=pgp(process.env.DATABASE_URL);
-pg.defaults.ssl=true;
+var sel=require('./select');
 
 module.exports = class SkypeBot {
-
 
     get apiaiService() {
         return this._apiaiService;
@@ -113,35 +99,7 @@ module.exports = class SkypeBot {
                     let responses;
                     let text="";
                     let text1="Test Lead";
-                    //sel(text1);
-                    getPersonne(text1);
-                    var js=require('./file1.json');
-                    console.log(js+" la premiere valeure");
-                    //noinspection JSAnnotator
-                    function getPersonne(req,res,next,fonctionID) {
-                        var fs = require('fs');
-                        let list=[];
-                        db.any('SELECT * FROM projet')
-                            .then(data => {
-                                fs.writeFile('./file1',data,function (err) {
-                                    if(err) {
-                                        return console.log(err);
-                                    }
-
-                                    console.log("The file was saved!");
-
-                                });
-                                console.log(list);
-                                list=data;
-                                session.send('Ahmad');
-                                //this.doRichContentResponse(session,data.toString());
-
-                            })
-                            .catch(error =>{
-                                console.log('ERROR:', error);
-                            });
-                        console.log(list+" exter");
-                    }
+                    sel(text1);
 
                     if(intentName==="projet_fonction") {
                         let fonction;
@@ -242,7 +200,6 @@ module.exports = class SkypeBot {
         }
     }
 
-
     doRichContentResponse(session, messages) {
         session.send(messages);
     }
@@ -258,5 +215,4 @@ module.exports = class SkypeBot {
 
         return obj != null;
     }
-
 }
