@@ -48,6 +48,7 @@ module.exports = function(fonctionID){
             });
         console.log(res);
     }
+    getPersonne();
 
 
 
