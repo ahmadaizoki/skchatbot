@@ -9,6 +9,12 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var multer = require('multer');
+var promise = require('bluebird');
+var options = {
+    // Initialization Options
+    promiseLib: promise
+};
+var pgp = require('pg-promise')(options);
 pg.defaults.ssl=true;
 
 module.exports = class SkypeBot {
@@ -106,7 +112,22 @@ module.exports = class SkypeBot {
                     let responses;
                     let text="";
                     let text1="Test Lead";
-                    sel(text1);
+                    //sel(text1);
+                    var db = pgp(process.env.DATABASE_URL);
+                    function getPersonne(req,res,next) {
+                        db.any(`SELECT personne FROM projet WHERE fonction='${fonctionID}'`,[true])
+                            .then(function (data) {
+                                res.status(200)
+                                    .json({
+                                        status: 'success',
+                                        data: data,
+                                        message: 'Retrieved Personne'
+                                    });
+                            })
+                        .catch(function (err) {
+                         return next(err);
+                         });
+                    }
 
                     if(intentName==="projet_fonction") {
                         let fonction;
