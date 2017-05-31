@@ -17,7 +17,7 @@ module.exports = function(projetID,fonctionID){
     let text="";
     console.log(projetID)
     console.log(fonctionID)
-    db.any(`SELECT personne FROM projet WHERE projet='Room' AND fonction='Test Lead'`)
+    db.any(`SELECT personne FROM projet WHERE projet='Room'`)
         .then(data => {
             var jsonfile = require('jsonfile')
             var file = 'file1.json'
