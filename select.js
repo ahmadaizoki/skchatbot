@@ -12,7 +12,7 @@ var options = {
 var pgp = require('pg-promise')(options);
 
 
-module.exports = function(fonctionID){
+module.exports = function(fonctionID,req,res){
            /* if (!fonctionID) {
                 var per=fonctionID;
 
@@ -32,8 +32,6 @@ module.exports = function(fonctionID){
                 console.error('error');
             }*/
     var db = pgp(process.env.DATABASE_URL);
-
-    function getPersonne(req, res, next) {
         let list=[];
         db.any(`SELECT personne FROM projet WHERE fonction='${fonctionID}'`,[true])
             .then(function (data) {
@@ -53,8 +51,6 @@ module.exports = function(fonctionID){
             console.log(list+" enfin");
 
         //console.log(res);
-    }
-    getPersonne();
 
 
 
