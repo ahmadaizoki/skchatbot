@@ -98,10 +98,8 @@ module.exports = class SkypeBot {
                     let intentName=response.result.metadata.intentName;
                     let responses;
                     let text="";
-                    let text1="Test Lead";
-                    sel(text1);
 
-                    if(intentName==="projet_fonction") {
+                    if(intentName==="projet_fonction"){
 
                         let fonction;
                         let projet;
@@ -125,10 +123,14 @@ module.exports = class SkypeBot {
                         } else {
                             projet = projet1 + " " + projet2 + " " + projet3;
                         }
-                        for (var i in exjson) {
-                            if (exjson[i].projet === projet && exjson[i].fonction === fonction) {
-                                text = text + exjson[i].personne + " ";
-                            }
+                        sel(projet,fonction);
+                    }
+
+                    if(intentName==="projet_fonction") {
+
+                        var exjson=require('./file1.json');
+                        for (var i in exjson){
+                            text=text+exjson[i].personne+" ";
                         }
                         if (text === "") {
                             responses = "Vous pouvez préciser votre question?";
