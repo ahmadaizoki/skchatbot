@@ -114,13 +114,14 @@ module.exports = class SkypeBot {
                     let text="";
                     let text1="Test Lead";
                     //sel(text1);
-                    getPersonne(text1);
+                    getPersonne(text1).res;
                     function getPersonne(req,res,next,fonctionID) {
                         db.any('SELECT * FROM projet')
                             .then(function (data) {
                                 console.log(data);
                                 res=data;
                                 console.log(res);
+                                return res;
                             });
                     }
 
