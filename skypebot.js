@@ -111,7 +111,7 @@ module.exports = class SkypeBot {
                         var jsonContent = JSON.parse(contents);
                         console.log("\n *FIN* \n");
                         // Get Value from JSON
-                        console.log("User Name:", jsonContent.personne);
+                        console.log("User Name:", jsonContent.anonymous.personne);
 
                         let fonction;
                         let projet;
