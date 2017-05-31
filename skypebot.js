@@ -99,10 +99,10 @@ module.exports = class SkypeBot {
                     let responses;
                     let text="";
                     let text1="Test Lead";
-                    sel(text1);
 
                     if(intentName==="projet_fonction") {
-
+                        sel(text1);
+                        console.log("coucou");
                         var fs = require("fs");
                         console.log("\n *STARTING* \n");
                         // Get content from file
