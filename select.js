@@ -3,6 +3,10 @@
 const config = require('./config');
 const pg = require('pg');
 var promise = require('bluebird');
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser');
+var multer = require('multer');
 
 pg.defaults.ssl = true;
 var options = {
@@ -12,7 +16,7 @@ var options = {
 var pgp = require('pg-promise')(options);
 
 
-module.exports = function(fonctionID,req,res){
+module.exports = function(req,res,fonctionID){
            /* if (!fonctionID) {
                 var per=fonctionID;
 
@@ -42,7 +46,7 @@ module.exports = function(fonctionID,req,res){
                 });*/
                 //console.log(data);
                 //list=data;
-                res.send(data);
+                res.JSON(data);
             })
             /*.catch(function (err) {
                 return next(err);

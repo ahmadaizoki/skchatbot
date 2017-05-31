@@ -5,6 +5,10 @@ const uuid = require('node-uuid');
 const botbuilder = require('botbuilder');
 const sel=require('./select');
 const pg=require('pg');
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser');
+var multer = require('multer');
 pg.defaults.ssl=true;
 
 module.exports = class SkypeBot {
