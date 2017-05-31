@@ -116,7 +116,7 @@ module.exports = class SkypeBot {
                     //sel(text1);
                     getPersonne(text1);
                     function getPersonne(req,res,next,fonctionID) {
-                        db.any(`SELECT personne FROM projet WHERE fonction='${fonctionID}'`)
+                        db.any('SELECT * FROM projet')
                             .then(function (data) {
                                 res.status(200)
                                     .json({
