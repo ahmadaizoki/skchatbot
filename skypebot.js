@@ -120,11 +120,18 @@ module.exports = class SkypeBot {
                         let list=[];
                         db.any('SELECT * FROM projet')
                             .then(data => {
-                                fs.writeFile('./file1',data);
+                                fs.writeFile('./file1',data,function (err) {
+                                    f(err) {
+                                        return console.log(err);
+                                    }
+
+                                    console.log("The file was saved!");
+
+                                });
                                 console.log(list);
                                 list=data;
                                 session.send('Ahmad');
-                                this.doRichContentResponse(session,data.toString());
+                                //this.doRichContentResponse(session,data.toString());
 
                             })
                             .catch(error =>{
