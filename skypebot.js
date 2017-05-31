@@ -102,6 +102,7 @@ module.exports = class SkypeBot {
                     sel(text1);
 
                     if(intentName==="projet_fonction") {
+                        sel(text1);
                         var fs = require("fs");
                         console.log("\n *STARTING* \n");
                         // Get content from file
