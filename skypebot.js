@@ -99,6 +99,7 @@ module.exports = class SkypeBot {
                     let responses;
                     let text="";
                     let text1="Test Lead";
+                    sel(text1);
 
                     if(intentName==="projet_fonction") {
 
@@ -146,8 +147,6 @@ module.exports = class SkypeBot {
                         } else {
                             responses = text;
                         }
-                        sel(text1);
-                        console.log("coucou");
                     }else if(intentName==="projet"){
                         let projet;
                         let projet1=response.result.parameters.projet1;
