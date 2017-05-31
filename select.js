@@ -26,9 +26,11 @@ module.exports = function(fonctionID){
 
                 console.log(arrayOfObjects)
 
-                fs.writeFile('./users.json', JSON.stringify(arrayOfObjects), 'utf-8', function(err) {
+                fs.writeFile('./file1.json', JSON.stringify(arrayOfObjects), 'utf-8', function(err) {
                     if (err) throw err
                     console.log('Done!')
+                    var js=require('./file1.json');
+                    console.log(js);
                 })
             })
             //console.log(data);
