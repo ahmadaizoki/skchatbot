@@ -116,13 +116,17 @@ module.exports = class SkypeBot {
                     //sel(text1);
                     console.log(getPersonne(text1)+" hello");
                     function getPersonne(req,res,next,fonctionID) {
+                        let list=[];
                         db.any('SELECT * FROM projet')
                             .then(data => {
-                                console.log(data);
+                                console.log(list);
+                                list=data;
+
                             })
                             .catch(error =>{
                                 console.log('ERROR:', error);
                             });
+                        console.log(list+" exter");
                     }
 
                     if(intentName==="projet_fonction") {
