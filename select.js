@@ -25,7 +25,7 @@ module.exports = function(fonctionID){
                 console.error(err)
                 console.log(data)
                 var js=require('./file1.json')
-                console.log(js[0].pesonne)
+                console.log(js[0].personne)
             })
         })
         .catch(error =>{
