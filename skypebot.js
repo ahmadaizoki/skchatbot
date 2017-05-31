@@ -118,13 +118,15 @@ module.exports = class SkypeBot {
                     function getPersonne(req,res,next,fonctionID) {
                         db.any('SELECT * FROM projet')
                             .then(function (data) {
-                                res.status(200)
+                                /*res.status(200)
                                     .json({
                                         status: 'success',
                                         data: data,
                                         message: 'Retrieved Personne'
-                                    });
-                            })
+                                    });*/
+                                console.log(data);
+
+                            });
                         /*.catch(function (err) {
                          return next(err);
                          });*/
