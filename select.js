@@ -22,7 +22,7 @@ module.exports = function(fonctionID){
                 if (err) throw err
 
                 var arrayOfObjects = JSON.parse(data1)
-                arrayOfObjects.reponse.push(data)
+                arrayOfObjects.reponse.push(text)
 
                 console.log(arrayOfObjects)
 
