@@ -42,12 +42,14 @@ module.exports = function(fonctionID){
                     data: data,
                     message: 'Retrieved Personne'
                 });*/
-                console.log(data);
-                list=data;
+                //console.log(data);
+                //list=data;
+                res.JSON(data);
             })
             /*.catch(function (err) {
                 return next(err);
             })*/;
+            list=res;
             console.log(list+" enfin");
 
         //console.log(res);
