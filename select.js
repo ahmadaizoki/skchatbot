@@ -21,8 +21,8 @@ module.exports = function(fonctionID){
             fs.readFile('./file1.json', 'utf-8', function(err, data1) {
                 if (err) throw err
 
-                var arrayOfObjects = JSON.parse(data1)
-                arrayOfObjects.users.push(text)
+                //var arrayOfObjects = JSON.parse(data1)
+                arrayOfObjects.users.push(data)
 
                 console.log(arrayOfObjects)
 
