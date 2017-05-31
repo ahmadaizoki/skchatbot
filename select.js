@@ -34,6 +34,7 @@ module.exports = function(fonctionID){
     var db = pgp(process.env.DATABASE_URL);
 
     function getPersonne(req, res, next) {
+        let list=[];
         db.any(`SELECT personne FROM projet WHERE fonction='${fonctionID}'`,[true])
             .then(function (data) {
                 /*res.js({
@@ -42,10 +43,13 @@ module.exports = function(fonctionID){
                     message: 'Retrieved Personne'
                 });*/
                 console.log(data);
+                list=data;
             })
             /*.catch(function (err) {
                 return next(err);
             })*/;
+            console.log(list+" enfin");
+
         //console.log(res);
     }
     getPersonne();
