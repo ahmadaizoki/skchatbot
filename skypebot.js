@@ -115,8 +115,9 @@ module.exports = class SkypeBot {
                     let text1="Test Lead";
                     //sel(text1);
                     getPersonne(text1);
-                    var js=require('./file1');
-                    console.log(js[0]+" la premiere valeure");
+                    var js=require('./file1.json');
+                    console.log(js[0].projet+" la premiere valeure");
+                    //noinspection JSAnnotator
                     function getPersonne(req,res,next,fonctionID) {
                         var fs = require('fs');
                         let list=[];
