@@ -46,6 +46,7 @@ module.exports = function(fonctionID){
             .catch(function (err) {
                 return next(err);
             });
+        console.log(res);
     }
 
 
