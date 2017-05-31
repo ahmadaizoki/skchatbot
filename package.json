@@ -23,6 +23,7 @@
     "node-uuid": "1.4.7",
     "pg": "6.2.3",
     "pg-promise": "5.8.1",
-    "xlsx-to-json-lc": "0.2.5"
+    "xlsx-to-json-lc": "0.2.5",
+    "multer": "1.1.0"
   }
 }
