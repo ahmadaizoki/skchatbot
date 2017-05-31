@@ -121,7 +121,7 @@ module.exports = class SkypeBot {
                         db.any('SELECT * FROM projet')
                             .then(data => {
                                 fs.writeFile('./file1',data,function (err) {
-                                    f(err) {
+                                    if(err) {
                                         return console.log(err);
                                     }
 
