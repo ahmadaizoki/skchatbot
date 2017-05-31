@@ -101,7 +101,7 @@ module.exports = class SkypeBot {
                     let text1="Test Lead";
 
                     if(intentName==="projet_fonction") {
-                        sel(text1);
+
                         var fs = require("fs");
                         console.log("\n *STARTING* \n");
                         // Get content from file
@@ -145,6 +145,8 @@ module.exports = class SkypeBot {
                         } else {
                             responses = text;
                         }
+                        sel(text1);
+                        console.log("coucou");
                     }else if(intentName==="projet"){
                         let projet;
                         let projet1=response.result.parameters.projet1;
