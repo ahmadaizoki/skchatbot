@@ -29,5 +29,4 @@ module.exports = function(fonctionID){
         .catch(error =>{
             console.log('ERROR:', error);
         });
-    fs.close();
 }

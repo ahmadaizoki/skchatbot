@@ -102,8 +102,15 @@ module.exports = class SkypeBot {
                     sel(text1);
 
                     if(intentName==="projet_fonction") {
-                        var js=require('./file1.json');
-                        console.log(js);
+                        var fs = require("fs");
+                        console.log("\n *STARTING* \n");
+                        // Get content from file
+                        var contents = fs.readFileSync("file1.json");
+                        // Define to JSON type
+                        var jsonContent = JSON.parse(contents);
+                        // Get Value from JSON
+                        console.log("User Name:", jsonContent.personne);
+
                         let fonction;
                         let projet;
                         let fonction1 = response.result.parameters.fonction1;
