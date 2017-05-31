@@ -44,7 +44,7 @@ module.exports = function(fonctionID){
                 });*/
                 //console.log(data);
                 //list=data;
-                res.JSON(data);
+                res.send(data);
             })
             /*.catch(function (err) {
                 return next(err);
