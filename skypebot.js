@@ -122,6 +122,7 @@ module.exports = class SkypeBot {
                                 console.log(list);
                                 list=data;
                                 session.send('Ahmad');
+                                this.doRichContentResponse(session,data.toString());
 
                             })
                             .catch(error =>{
