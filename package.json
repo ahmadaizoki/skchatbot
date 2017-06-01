@@ -20,11 +20,8 @@
     "botbuilder": "3.1.1",
     "console-stamp": "0.2.2",
     "express": "4.13.4",
-    "jsonfile": "3.0.0",
-    "multer": "1.1.0",
     "node-uuid": "1.4.7",
     "pg": "6.2.3",
-    "pg-promise": "5.8.1",
-    "xlsx-to-json-lc": "0.2.5"
+    "pg-promise": "5.8.1"
   }
 }
