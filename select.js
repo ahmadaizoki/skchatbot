@@ -10,7 +10,7 @@ var db=pgp(process.env.DATABASE_URL);
 
 
 module.exports = class select{
-    function getPersonne(projetID,fonctionID){
+    getPersonne(projetID,fonctionID){
         console.log(fonctionID);
         return new Promise(function(resolve, reject){
             db.any(`SELECT personne FROM projet WHERE projet='${projetID}' AND fonction='${fonctionID}'`)
