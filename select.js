@@ -3,7 +3,7 @@ const config = require('./config');
 const pg = require('pg');
 var promise = require('bluebird');
 var jsonfile = require('jsonfile');
-var file = require('./file1');
+var file = require('./output');
 
 pg.defaults.ssl = true;
 var options = {
