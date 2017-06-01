@@ -4,6 +4,13 @@ const apiai = require('apiai');
 const uuid = require('node-uuid');
 const botbuilder = require('botbuilder');
 var sel=require('./select');
+const promise = require('bluebird');
+var options = {
+    // Initialization Options
+    promiseLib: promise
+};
+const pgp = require('pg-promise')(options);
+const db=pgp(process.env.DATABASE_URL);
 
 module.exports = class SkypeBot {
 
@@ -124,9 +131,17 @@ module.exports = class SkypeBot {
                         } else {
                             projet = projet1 + " " + projet2 + " " + projet3;
                         }
-                        var select=new sel();
-                        var textt="";
-                        responses=sel.getPersonne(selectM.has(projet,fonction));
+                        db.any(`SELECT personne FROM projet WHERE projet='${projetID}' AND fonction='${fonctionID}'`)
+                            .then(data => {
+                                for (var i in data){
+                                    text=text+data[i].personne+" ";
+                                }
+                                this.doRichContentResponse(session,text);
+                            })
+                            .catch(error =>{
+                                console.log('ERROR1:', error);
+                            });
+
                     }else if(intentName==="projet"){
                         let projet;
                         let projet1=response.result.parameters.projet1;
