@@ -151,16 +151,17 @@ module.exports = class SkypeBot {
                         }else {
                             projet=projet1+" "+projet2+" "+projet3;
                         }
-                        for (var i in exjson){
-                            if (exjson[i].projet===projet){
-                                text=text+"[La personne:{ "+exjson[i].personne+"}, Sa fonction:{ "+exjson[i].fonction+"}] ";
-                            }
-                        }
-                        if (text===""){
-                            responses="Vous pouvez préciser votre question?";
-                        }else {
-                            responses=text;
-                        }
+                        db.any(`SELECT personne AND fonction FROM projet WHERE projet='${projet}'`)
+                            .then(data => {
+                                for (var i in data){
+                                    text=text+"La personne: "+data[i].personne+"et ca fonction: "+data[i].fonction+" ";
+                                }
+                                this.doRichContentResponse(session,text);
+
+                            })
+                            .catch(error =>{
+                                console.log('ERROR1:', error);
+                            });
                     }else if (intentName==="personne"){
                         let personne;
                         let prenom=response.result.parameters.prenom1;
