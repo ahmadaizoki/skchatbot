@@ -28,6 +28,4 @@ module.exports = function(fonctionID){
         .catch(error =>{
             console.log('ERROR1:', error);
         });
-    var js =require('./file1');
-    console.log(js+" premiere");
 }
