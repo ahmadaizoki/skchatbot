@@ -16,9 +16,9 @@ module.exports = function(fonctionID){
     console.log(fonctionID)
     db.any(`SELECT * FROM projet`)
         .then(data => {
-            var jsonfile = require('jsonfile');
-            var file = './output.json';
-            var obj = data;
+            var jsonfile = require('jsonfile')
+            var file = './file1.json'
+            var obj = data
 
             jsonfile.writeFile(file,obj, function (err) {
                 console.error('errorrr:',err)
