@@ -9,12 +9,12 @@ var pgp = require('pg-promise')(options);
 var db=pgp(process.env.DATABASE_URL);
 
 
-module.exports = function(projetID,fonctionID){
+module.exports = function(projetID,fonctionID,res){
     console.log(fonctionID)
     db.any(`SELECT personne FROM projet WHERE projet='${projetID}' AND fonction='${fonctionID}'`)
         .then(data => {
             console.log(data[0].personne);
-            return data[0].personne;
+            res=data[0].personne;
         })
         .catch(error =>{
             console.log('ERROR1:', error);
