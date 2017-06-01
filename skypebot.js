@@ -138,7 +138,7 @@ module.exports = class SkypeBot {
                             .catch(error =>{
                                 console.log('ERROR:', error);
                             });
-                    }else if(intentName==="projet"){
+                    } else if(intentName==="projet"){
                         let projet;
                         let projet1=response.result.parameters.projet1;
                         let projet2=response.result.parameters.projet2;
@@ -161,7 +161,7 @@ module.exports = class SkypeBot {
                             .catch(error =>{
                                 console.log('ERROR:', error);
                             });
-                    }else if (intentName==="personne"){
+                    } else if (intentName==="personne"){
                         let personne;
                         let prenom=response.result.parameters.prenom1;
                         let nom=response.result.parameters.nom1;
@@ -177,15 +177,8 @@ module.exports = class SkypeBot {
                             .catch(error =>{
                                 console.log('ERROR:', error);
                             });
-                    }
-                    else {
+                    } else if (SkypeBot.isDefined(responseText)) {
                         this.doRichContentResponse(session,responseText);
-                    }
-
-                    if (SkypeBot.isDefined(responseText)) {
-                        console.log(sender, 'Response as text message');
-                        session.send(responseText);
-
                     } else {
                         console.log(sender, 'Received empty speech');
                     }
