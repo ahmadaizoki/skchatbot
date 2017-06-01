@@ -16,7 +16,7 @@ module.exports = class select{
             db.any(`SELECT personne FROM projet WHERE projet='${projetID}' AND fonction='${fonctionID}'`)
                 .then(data => {
                     console.log(data[0].personne);
-                    res=data[0].personne;
+                    var res=data[0].personne;
                     console.log("res "+res);
                     resolve(res);
                 })
