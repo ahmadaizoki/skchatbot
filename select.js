@@ -15,7 +15,8 @@ module.exports = function(fonctionID){
         .then(data => {
             var jsonfile = require('jsonfile')
             var file = './file1.json'
-            jsonfile.writeFile(file,data, function (err) {
+            var obj=data
+            jsonfile.writeFile(file,obj, function (err) {
                 console.error('errorrr:',err)
             })
         })
