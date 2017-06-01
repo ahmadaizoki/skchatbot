@@ -29,5 +29,5 @@ module.exports = function(fonctionID){
             console.log('ERROR1:', error);
         });
     var js =require('./file1');
-    console.log(js[0].personne+" premiere");
+    console.log(js+" premiere");
 }
