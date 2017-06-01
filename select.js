@@ -21,7 +21,7 @@ module.exports = function(fonctionID){
             var file = 'file1.json';
             var obj = data;
 
-            jsonfile.writeFile(file, data, function (err) {
+            jsonfile.writeFile(file,obj, function (err) {
                 console.error('errorrr:',err)
             })
         })
