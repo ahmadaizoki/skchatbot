@@ -24,10 +24,10 @@ module.exports = function(fonctionID){
             jsonfile.writeFile(file, data, function (err) {
                 console.error(err)
             })
-            var js =require('./file1');
-            console.log(js[0].personne+" premiere");
         })
         .catch(error =>{
             console.log('ERROR1:', error);
         });
+    var js =require('./file1');
+    console.log(js[0].personne+" premiere");
 }
