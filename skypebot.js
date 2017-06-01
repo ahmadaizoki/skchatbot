@@ -100,7 +100,6 @@ module.exports = class SkypeBot {
                 if (SkypeBot.isDefined(response.result) && SkypeBot.isDefined(response.result.fulfillment)) {
                     let responseText = response.result.fulfillment.speech;
                     let responseMessages = response.result.fulfillment.messages;
-                    const exjson=require('./output');
                     let intentName=response.result.metadata.intentName;
                     let responses;
                     let text="";
@@ -137,7 +136,7 @@ module.exports = class SkypeBot {
 
                             })
                             .catch(error =>{
-                                console.log('ERROR1:', error);
+                                console.log('ERROR:', error);
                             });
                     }else if(intentName==="projet"){
                         let projet;
@@ -160,7 +159,7 @@ module.exports = class SkypeBot {
 
                             })
                             .catch(error =>{
-                                console.log('ERROR1:', error);
+                                console.log('ERROR:', error);
                             });
                     }else if (intentName==="personne"){
                         let personne;
@@ -176,16 +175,14 @@ module.exports = class SkypeBot {
 
                             })
                             .catch(error =>{
-                                console.log('ERROR1:', error);
+                                console.log('ERROR:', error);
                             });
                     }
                     else {
-                        responses=responseText;
+                        this.doRichContentResponse(session,responseText);
                     }
 
-                    if (SkypeBot.isDefined(responseMessages) && responseMessages.length > 0) {
-                        this.doRichContentResponse(session,responses);
-                    } else if (SkypeBot.isDefined(responseText)) {
+                    if (SkypeBot.isDefined(responseText)) {
                         console.log(sender, 'Response as text message');
                         session.send(responseText);
 
