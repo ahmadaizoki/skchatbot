@@ -151,7 +151,7 @@ module.exports = class SkypeBot {
                         }else {
                             projet=projet1+" "+projet2+" "+projet3;
                         }
-                        db.any(`SELECT personne AND fonction FROM projet WHERE projet='${projet}'`)
+                        db.any(`SELECT personne,fonction FROM projet WHERE projet='${projet}'`)
                             .then(data => {
                                 for (var i in data){
                                     text=text+"La personne: "+data[i].personne+"et ca fonction: "+data[i].fonction+" ";
