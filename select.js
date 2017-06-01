@@ -2,6 +2,8 @@
 const config = require('./config');
 const pg = require('pg');
 var promise = require('bluebird');
+var jsonfile = require('jsonfile');
+var file = require('./file1');
 
 pg.defaults.ssl = true;
 var options = {
@@ -16,11 +18,7 @@ module.exports = function(fonctionID){
     console.log(fonctionID)
     db.any(`SELECT * FROM projet`)
         .then(data => {
-            var jsonfile = require('jsonfile')
-            var file = './file1.json'
-            var obj = data
-
-            jsonfile.writeFile(file,obj, function (err) {
+            jsonfile.writeFile(file,data, function (err) {
                 console.error('errorrr:',err)
             })
         })
