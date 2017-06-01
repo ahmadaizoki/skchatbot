@@ -68,6 +68,7 @@ module.exports = class SkypeBot {
 
         let messageText = session.message.text;
         let sender = session.message.address.conversation.id;
+        var selectM=new Map();
 
         if (messageText && sender) {
 
@@ -125,7 +126,7 @@ module.exports = class SkypeBot {
                         }
                         var select=new sel();
                         var textt="";
-                        textt=textt+select.getPersonne(projet,fonction).Promise();
+                        textt=textt+selectM.sel.getPersonne(projet,fonction);
                         responses=textt;
                     }else if(intentName==="projet"){
                         let projet;
