@@ -126,8 +126,6 @@ module.exports = class SkypeBot {
                         let text1="Test Lead";
                         let text2="Room";
                         sel(text1);
-                        console.log(projet);
-                        console.log(fonction);
                     }
 
                     if(intentName==="projet_fonction") {

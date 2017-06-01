@@ -14,13 +14,12 @@ var db=pgp(process.env.DATABASE_URL);
 
 module.exports = function(fonctionID){
     var fs = require('fs');
-    let text="";
     console.log(fonctionID)
     db.any(`SELECT personne FROM projet WHERE fonction='${fonctionID}'`)
         .then(data => {
-            var jsonfile = require('jsonfile')
-            var file = 'file1.json'
-            var obj = data
+            var jsonfile = require('jsonfile');
+            var file = 'file1.json';
+            var obj = data;
 
             jsonfile.writeFile(file, data, function (err) {
                 console.error(err)
