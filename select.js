@@ -22,7 +22,7 @@ module.exports = function(fonctionID){
             var obj = data;
 
             jsonfile.writeFile(file, data, function (err) {
-                console.error(err)
+                console.error('errorrr:',err)
             })
         })
         .catch(error =>{
