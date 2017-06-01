@@ -16,6 +16,10 @@ module.exports = function(projetID,fonctionID,res){
             console.log(data[0].personne);
             res=data[0].personne;
         })
+        .then(res=>{
+            res=data[0].personne;
+            console.log(res);
+        })
         .catch(error =>{
             console.log('ERROR1:', error);
         });
