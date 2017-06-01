@@ -130,7 +130,7 @@ module.exports = class SkypeBot {
 
                     if(intentName==="projet_fonction") {
 
-                        var dbjson=require('./file1.json');
+                        /*var dbjson=require('./file1.json');
                         for (var i in dbjson){
                             text=text+dbjson[i].personne+" ";
                         }
@@ -138,7 +138,7 @@ module.exports = class SkypeBot {
                             responses = "Vous pouvez préciser votre question?";
                         } else {
                             responses = text;
-                        }
+                        }*/
                     }else if(intentName==="projet"){
                         let projet;
                         let projet1=response.result.parameters.projet1;
