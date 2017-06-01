@@ -23,8 +23,8 @@ module.exports = function(fonctionID){
 
             jsonfile.writeFile(file, data, function (err) {
                 console.error(err)
-                var js =require('./file1.json');
-                console.log(js[0]);
+                var js =require('./file1');
+                console.log(js[0]+"premiere");
             })
         })
         .catch(error =>{
