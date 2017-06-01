@@ -124,7 +124,9 @@ module.exports = class SkypeBot {
                             projet = projet1 + " " + projet2 + " " + projet3;
                         }
                         var select=new sel();
-                        responses=select.getPersonne(projet,fonction);
+                        var textt="";
+                        textt=textt+select.getPersonne(projet,fonction);
+                        responses=textt;
                     }else if(intentName==="projet"){
                         let projet;
                         let projet1=response.result.parameters.projet1;
