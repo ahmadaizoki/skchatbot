@@ -3,14 +3,13 @@
 const apiai = require('apiai');
 const uuid = require('node-uuid');
 const botbuilder = require('botbuilder');
-var sel=require('./select');
-const promise = require('bluebird');
+var promise = require('bluebird');
 var options = {
     // Initialization Options
     promiseLib: promise
 };
-const pgp = require('pg-promise')(options);
-const db=pgp(process.env.DATABASE_URL);
+var pgp = require('pg-promise')(options);
+var db=pgp(process.env.DATABASE_URL);
 
 module.exports = class SkypeBot {
 
@@ -75,7 +74,6 @@ module.exports = class SkypeBot {
 
         let messageText = session.message.text;
         let sender = session.message.address.conversation.id;
-        var selectM=new Map();
 
         if (messageText && sender) {
 
@@ -107,8 +105,7 @@ module.exports = class SkypeBot {
                     let responses;
                     let text="";
 
-                    if(intentName==="projet_fonction"){
-
+                    if(intentName==="projet_fonction") {
                         let fonction;
                         let projet;
                         let fonction1 = response.result.parameters.fonction1;
@@ -131,17 +128,17 @@ module.exports = class SkypeBot {
                         } else {
                             projet = projet1 + " " + projet2 + " " + projet3;
                         }
-                        db.any(`SELECT personne FROM projet WHERE projet='${projetID}' AND fonction='${fonctionID}'`)
+                        db.any(`SELECT personne FROM projet WHERE projet='${projet}' AND fonction='${fonction}'`)
                             .then(data => {
                                 for (var i in data){
                                     text=text+data[i].personne+" ";
                                 }
                                 this.doRichContentResponse(session,text);
+
                             })
                             .catch(error =>{
                                 console.log('ERROR1:', error);
                             });
-
                     }else if(intentName==="projet"){
                         let projet;
                         let projet1=response.result.parameters.projet1;
