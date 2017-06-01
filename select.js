@@ -1,6 +1,5 @@
 'use strict';
 const config = require('./config');
-const pg = require('pg');
 var promise = require('bluebird');
 
 
@@ -18,8 +17,8 @@ module.exports = function(fonctionID){
     db.any(`SELECT * FROM projet`)
         .then(data => {
             var jsonfile = require('jsonfile')
-            var file = './output'
-            jsonfile.writeFile(file,data, function (err) {
+            var file = './file1.json'
+            jsonfile.writeFileSync(file,data, function (err) {
                 console.error('errorrr:',err)
             })
         })
