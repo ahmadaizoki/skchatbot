@@ -13,7 +13,7 @@ module.exports = function(projetID,fonctionID){
     console.log(fonctionID)
     db.any(`SELECT personne FROM projet WHERE projet='${projetID}' AND fonction='${fonctionID}'`)
         .then(data => {
-            console.log(data.personne);
+            console.log(data);
             return data;
         })
         .catch(error =>{
