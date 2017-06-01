@@ -1,9 +1,6 @@
 'use strict';
 const config = require('./config');
 var promise = require('bluebird');
-
-
-pg.defaults.ssl = true;
 var options = {
     // Initialization Options
     promiseLib: promise
