@@ -15,7 +15,7 @@ module.exports = function(projetID,fonctionID){
         .then(data => {
             console.log(data);
             return;
-        }
+        })
         .catch(error =>{
             console.log('ERROR1:', error);
         });
