@@ -154,7 +154,7 @@ module.exports = class SkypeBot {
                         db.any(`SELECT personne,fonction FROM projet WHERE projet='${projet}'`)
                             .then(data => {
                                 for (var i in data){
-                                    text=text+"La personne: "+data[i].personne+"et ca fonction: "+data[i].fonction+" ";
+                                    text=text+"La personne: "+data[i].personne+" et ca fonction: "+data[i].fonction+" ";
                                 }
                                 this.doRichContentResponse(session,text);
 
@@ -167,16 +167,17 @@ module.exports = class SkypeBot {
                         let prenom=response.result.parameters.prenom1;
                         let nom=response.result.parameters.nom1;
                         personne=prenom+" "+nom;
-                        for (var i in exjson){
-                            if (exjson[i].personne===personne){
-                                text=text+"[Le projet:{ "+exjson[i].projet+"}, La fonction:{ "+exjson[i].fonction+"}] ";
-                            }
-                        }
-                        if (text===""){
-                            responses="Vous pouvez préciser votre question?";
-                        }else {
-                            responses=text;
-                        }
+                        db.any(`SELECT projet,fonction FROM projet WHERE personne='${personne}'`)
+                            .then(data => {
+                                for (var i in data){
+                                    text=text+"Le projet: "+data[i].projet+" et ca fonction: "+data[i].fonction+" ";
+                                }
+                                this.doRichContentResponse(session,text);
+
+                            })
+                            .catch(error =>{
+                                console.log('ERROR1:', error);
+                            });
                     }
                     else {
                         responses=responseText;
