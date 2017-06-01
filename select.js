@@ -9,17 +9,13 @@ var pgp = require('pg-promise')(options);
 var db=pgp(process.env.DATABASE_URL);
 
 
-module.exports = function(fonctionID){
+module.exports = function(projetID,fonctionID){
     console.log(fonctionID)
-    db.any(`SELECT personne FROM projet`)
+    db.any(`SELECT personne FROM projet WHERE projet='${projetID}' AND fonction='${fonctionID}'`)
         .then(data => {
-            var jsonfile = require('jsonfile')
-            var file = './file1.json'
-            var obj=data
-            jsonfile.writeFile(file,obj, function (err) {
-                console.error('errorrr:',err)
-            })
-        })
+            console.log(data);
+            return;
+        }
         .catch(error =>{
             console.log('ERROR1:', error);
         });

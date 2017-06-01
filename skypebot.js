@@ -123,22 +123,7 @@ module.exports = class SkypeBot {
                         } else {
                             projet = projet1 + " " + projet2 + " " + projet3;
                         }
-                        let text1="Test Lead";
-                        let text2="Room";
-                        sel(text1);
-                    }
-
-                    if(intentName==="projet_fonction") {
-
-                        /*var dbjson=require('./file1.json');
-                        for (var i in dbjson){
-                            text=text+dbjson[i].personne+" ";
-                        }
-                        if (text === "") {
-                            responses = "Vous pouvez préciser votre question?";
-                        } else {
-                            responses = text;
-                        }*/
+                        responses=sel(projet,fonction);
                     }else if(intentName==="projet"){
                         let projet;
                         let projet1=response.result.parameters.projet1;
