@@ -17,6 +17,8 @@ module.exports = function(fonctionID){
             var file = './file1.json'
             jsonfile.writeFileSync(file,data, function (err) {
                 console.error('errorrr:',err)
+                var js=require('./file1.json');
+                console.log(js[0]);
             })
         })
         .catch(error =>{
