@@ -107,7 +107,7 @@ module.exports = class SkypeBot {
                     .then(data1=>{
                         let role=data1[0].role;
                         roletest=role;
-                        if (role==="admin"){
+                        if (role){
                             console.log("coucou");
                         }
                         if (SkypeBot.isDefined(response.result) && SkypeBot.isDefined(response.result.fulfillment)) {
