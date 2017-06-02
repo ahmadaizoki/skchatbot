@@ -111,7 +111,6 @@ module.exports = class SkypeBot {
                             let intentName=response.result.metadata.intentName;
                             let responses;
                             let text="";
-                            console.log(role);
 
                             if(intentName==="projet_fonction") {
                                 let fonction;
@@ -136,6 +135,7 @@ module.exports = class SkypeBot {
                                 } else {
                                     projet = projet1 + " " + projet2 + " " + projet3;
                                 }
+                                console.log(role);
                                 db.any(`SELECT personne FROM projet WHERE projet='${projet}' AND fonction='${fonction}'`)
                                     .then(data => {
                                         for (var i in data){
