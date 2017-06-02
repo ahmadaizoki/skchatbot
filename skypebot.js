@@ -206,7 +206,7 @@ module.exports = class SkypeBot {
                                 console.log('ERROR:', error);
                             });
                     } else if (intentName==="hiiiii"){
-                        let ttt=response.result.fulfillment.messages.payload.skype.text;
+                        let ttt=response.result.fulfillment.messages.speech;
                         this.doRichContentResponse(session,ttt);
 
                     } else if (SkypeBot.isDefined(responseText)) {
