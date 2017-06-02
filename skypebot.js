@@ -99,7 +99,7 @@ module.exports = class SkypeBot {
                 if (this._botConfig.devConfig) {
                     console.log(sender, "Received api.ai response");
                 }
-                db.any(`SELECT name,role FROM user WHERE name='${username}'`)
+                db.any(`SELECT name,role FROM role WHERE name='${username}'`)
                     .then(data=>{
                         console.log(data);
                     })
