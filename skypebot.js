@@ -104,127 +104,131 @@ module.exports = class SkypeBot {
                     .then(data1=>{
                         let role=data1[0].role;
                         console.log(role);
+                        if (SkypeBot.isDefined(response.result) && SkypeBot.isDefined(response.result.fulfillment)) {
+                            let responseText = response.result.fulfillment.speech;
+                            let responseMessages = response.result.fulfillment.messages;
+                            let intentName=response.result.metadata.intentName;
+                            let responses;
+                            let text="";
+
+                            if(intentName==="projet_fonction") {
+                                let fonction;
+                                let projet;
+                                let fonction1 = response.result.parameters.fonction1;
+                                let fonction2 = response.result.parameters.fonction2;
+                                let fonction3 = response.result.parameters.fonction3;
+                                let projet1 = response.result.parameters.projet1;
+                                let projet2 = response.result.parameters.projet2;
+                                let projet3 = response.result.parameters.projet3;
+                                if (fonction2 === "" && fonction3 === "") {
+                                    fonction = fonction1;
+                                } else if (fonction3 === "") {
+                                    fonction = fonction1 + " " + fonction2;
+                                } else {
+                                    fonction = fonction1 + " " + fonction2 + " " + fonction3;
+                                }
+                                if (projet2 === "" && projet3 === "") {
+                                    projet = projet1;
+                                } else if (projet3 === "") {
+                                    projet = projet1 + " " + projet2;
+                                } else {
+                                    projet = projet1 + " " + projet2 + " " + projet3;
+                                }
+                                db.any(`SELECT personne FROM projet WHERE projet='${projet}' AND fonction='${fonction}'`)
+                                    .then(data => {
+                                        for (var i in data){
+                                            text=text+data[i].personne+" ";
+                                        }
+                                        if (text===""){
+                                            this.doRichContentResponse(session,"je crois que tu t'es troumbé!");
+                                        } else {
+                                            this.doRichContentResponse(session,text);
+                                        }
+
+                                    })
+                                    .catch(error =>{
+                                        console.log('ERROR:', error);
+                                    });
+                            } else if(intentName==="projet"){
+                                let projet;
+                                let projet1=response.result.parameters.projet1;
+                                let projet2=response.result.parameters.projet2;
+                                let projet3=response.result.parameters.projet3;
+                                if (projet2==="" && projet3===""){
+                                    projet=projet1;
+                                }else if (projet3===""){
+                                    projet=projet1+" "+projet2;
+                                }else {
+                                    projet=projet1+" "+projet2+" "+projet3;
+                                }
+                                db.any(`SELECT personne,fonction FROM projet WHERE projet='${projet}'`)
+                                    .then(data => {
+                                        for (var i in data){
+                                            text=text+"La personne: "+data[i].personne+" et ca fonction: "+data[i].fonction+" ";
+                                        }
+                                        if (text===""){
+                                            this.doRichContentResponse(session,"je crois que tu t'es troumbé!");
+                                        } else {
+                                            this.doRichContentResponse(session,text);
+                                        }
+                                    })
+                                    .catch(error =>{
+                                        console.log('ERROR:', error);
+                                    });
+                            } else if (intentName==="personne"){
+                                let personne;
+                                let prenom=response.result.parameters.prenom1;
+                                let nom=response.result.parameters.nom1;
+                                personne=prenom+" "+nom;
+                                db.any(`SELECT projet,fonction FROM projet WHERE personne='${personne}'`)
+                                    .then(data => {
+                                        for (var i in data){
+                                            text=text+"Le projet: "+data[i].projet+" et ca fonction: "+data[i].fonction+" ";
+                                        }
+                                        if (text===""){
+                                            this.doRichContentResponse(session,"je crois que tu t'es troumbé!");
+                                        } else {
+                                            this.doRichContentResponse(session,text);
+                                        }
+                                    })
+                                    .catch(error =>{
+                                        console.log('ERROR:', error);
+                                    });
+                            } else if (intentName==="list" && role==="admin") {
+                                let table=response.result.parameters.table1;
+                                table=table.toLowerCase();
+                                db.any(config.selectAll)
+                                    .then(data => {
+                                        for (var i in data){
+                                            text=text+"Le projet: "+data[i].projet+" et la fonction: "+data[i].fonction+" et le prenom nom: "+data[i].personne+" ";
+                                        }
+                                        if (text===""){
+                                            this.doRichContentResponse(session,"je crois que tu t'es troumbé!");
+                                        } else {
+                                            this.doRichContentResponse(session,text);
+                                        }
+                                    })
+                                    .catch(error =>{
+                                        console.log('ERROR:', error);
+                                    });
+                            }else if(intentName==="list"){
+                                this.doRichContentResponse(session,"Vous n'avaez pas les droits de completer cet action!");
+                            }
+                            else if (SkypeBot.isDefined(responseText)) {
+                                this.doRichContentResponse(session,responseText);
+                            } else {
+                                console.log(sender, 'Received empty speech');
+                            }
+                        } else {
+                            console.log(sender, 'Received empty result');
+                        }
 
                     })
                     .catch(error =>{
                         console.log('ERROR:', error);
                     });
 
-                if (SkypeBot.isDefined(response.result) && SkypeBot.isDefined(response.result.fulfillment)) {
-                    let responseText = response.result.fulfillment.speech;
-                    let responseMessages = response.result.fulfillment.messages;
-                    let intentName=response.result.metadata.intentName;
-                    let responses;
-                    let text="";
 
-                    if(intentName==="projet_fonction") {
-                        let fonction;
-                        let projet;
-                        let fonction1 = response.result.parameters.fonction1;
-                        let fonction2 = response.result.parameters.fonction2;
-                        let fonction3 = response.result.parameters.fonction3;
-                        let projet1 = response.result.parameters.projet1;
-                        let projet2 = response.result.parameters.projet2;
-                        let projet3 = response.result.parameters.projet3;
-                        if (fonction2 === "" && fonction3 === "") {
-                            fonction = fonction1;
-                        } else if (fonction3 === "") {
-                            fonction = fonction1 + " " + fonction2;
-                        } else {
-                            fonction = fonction1 + " " + fonction2 + " " + fonction3;
-                        }
-                        if (projet2 === "" && projet3 === "") {
-                            projet = projet1;
-                        } else if (projet3 === "") {
-                            projet = projet1 + " " + projet2;
-                        } else {
-                            projet = projet1 + " " + projet2 + " " + projet3;
-                        }
-                        db.any(`SELECT personne FROM projet WHERE projet='${projet}' AND fonction='${fonction}'`)
-                            .then(data => {
-                                for (var i in data){
-                                    text=text+data[i].personne+" ";
-                                }
-                                if (text===""){
-                                    this.doRichContentResponse(session,"je crois que tu t'es troumbé!");
-                                } else {
-                                    this.doRichContentResponse(session,text);
-                                }
-
-                            })
-                            .catch(error =>{
-                                console.log('ERROR:', error);
-                            });
-                    } else if(intentName==="projet"){
-                        let projet;
-                        let projet1=response.result.parameters.projet1;
-                        let projet2=response.result.parameters.projet2;
-                        let projet3=response.result.parameters.projet3;
-                        if (projet2==="" && projet3===""){
-                            projet=projet1;
-                        }else if (projet3===""){
-                            projet=projet1+" "+projet2;
-                        }else {
-                            projet=projet1+" "+projet2+" "+projet3;
-                        }
-                        db.any(`SELECT personne,fonction FROM projet WHERE projet='${projet}'`)
-                            .then(data => {
-                                for (var i in data){
-                                    text=text+"La personne: "+data[i].personne+" et ca fonction: "+data[i].fonction+" ";
-                                }
-                                if (text===""){
-                                    this.doRichContentResponse(session,"je crois que tu t'es troumbé!");
-                                } else {
-                                    this.doRichContentResponse(session,text);
-                                }
-                            })
-                            .catch(error =>{
-                                console.log('ERROR:', error);
-                            });
-                    } else if (intentName==="personne"){
-                        let personne;
-                        let prenom=response.result.parameters.prenom1;
-                        let nom=response.result.parameters.nom1;
-                        personne=prenom+" "+nom;
-                        db.any(`SELECT projet,fonction FROM projet WHERE personne='${personne}'`)
-                            .then(data => {
-                                for (var i in data){
-                                    text=text+"Le projet: "+data[i].projet+" et ca fonction: "+data[i].fonction+" ";
-                                }
-                                if (text===""){
-                                    this.doRichContentResponse(session,"je crois que tu t'es troumbé!");
-                                } else {
-                                    this.doRichContentResponse(session,text);
-                                }
-                            })
-                            .catch(error =>{
-                                console.log('ERROR:', error);
-                            });
-                    } else if (intentName==="list") {
-                        let table=response.result.parameters.table1;
-                        table=table.toLowerCase();
-                        db.any(config.selectAll)
-                            .then(data => {
-                                for (var i in data){
-                                    text=text+"Le projet: "+data[i].projet+" et la fonction: "+data[i].fonction+" et le prenom nom: "+data[i].personne+" ";
-                                }
-                                if (text===""){
-                                    this.doRichContentResponse(session,"je crois que tu t'es troumbé!");
-                                } else {
-                                    this.doRichContentResponse(session,text);
-                                }
-                            })
-                            .catch(error =>{
-                                console.log('ERROR:', error);
-                            });
-                    } else if (SkypeBot.isDefined(responseText)) {
-                        this.doRichContentResponse(session,responseText);
-                    } else {
-                        console.log(sender, 'Received empty speech');
-                    }
-                } else {
-                    console.log(sender, 'Received empty result');
-                }
             });
 
             apiaiRequest.on('error', (error) => {
