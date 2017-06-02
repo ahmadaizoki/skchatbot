@@ -75,7 +75,8 @@ module.exports = class SkypeBot {
 
         let messageText = session.message.text;
         let sender = session.message.address.conversation.id;
-        let username=session.message.user.name;
+        let name=session.message.user.name;
+        let username=name.toLowerCase();
         console.log(session.message.user.name);
 
         if (messageText && sender) {
