@@ -132,7 +132,11 @@ module.exports = class SkypeBot {
                                 for (var i in data){
                                     text=text+data[i].personne+" ";
                                 }
-                                this.doRichContentResponse(session,text);
+                                if (text===""){
+                                    this.doRichContentResponse(session,"je crois que tu t'es troumbé!");
+                                } else {
+                                    this.doRichContentResponse(session,text);
+                                }
 
                             })
                             .catch(error =>{
@@ -155,8 +159,11 @@ module.exports = class SkypeBot {
                                 for (var i in data){
                                     text=text+"La personne: "+data[i].personne+" et ca fonction: "+data[i].fonction+" ";
                                 }
-                                this.doRichContentResponse(session,text);
-
+                                if (text===""){
+                                    this.doRichContentResponse(session,"je crois que tu t'es troumbé!");
+                                } else {
+                                    this.doRichContentResponse(session,text);
+                                }
                             })
                             .catch(error =>{
                                 console.log('ERROR:', error);
@@ -171,8 +178,28 @@ module.exports = class SkypeBot {
                                 for (var i in data){
                                     text=text+"Le projet: "+data[i].projet+" et ca fonction: "+data[i].fonction+" ";
                                 }
-                                this.doRichContentResponse(session,text);
-
+                                if (text===""){
+                                    this.doRichContentResponse(session,"je crois que tu t'es troumbé!");
+                                } else {
+                                    this.doRichContentResponse(session,text);
+                                }
+                            })
+                            .catch(error =>{
+                                console.log('ERROR:', error);
+                            });
+                    } else if (intentName==="list") {
+                        let table=response.result.parameters.table1;
+                        table=table.toLowerCase();
+                        db.any(`SELECT * FROM '${table}'`)
+                            .then(data => {
+                                for (var i in data){
+                                    text=text+"Le projet: "+data[i].projet+" et la fonction: "+data[i].fonction+" et le prenom nom: "+data[i].personne+" ";
+                                }
+                                if (text===""){
+                                    this.doRichContentResponse(session,"je crois que tu t'es troumbé!");
+                                } else {
+                                    this.doRichContentResponse(session,text);
+                                }
                             })
                             .catch(error =>{
                                 console.log('ERROR:', error);
