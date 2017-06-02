@@ -190,7 +190,6 @@ module.exports = class SkypeBot {
                             });
                     } else if (intentName==="list") {
                         let table=response.result.parameters.table1;
-                        let ttt=response.result.fullfillment.messages.payload.skype.text;
                         table=table.toLowerCase();
                         db.any(config.selectAll)
                             .then(data => {
@@ -200,12 +199,16 @@ module.exports = class SkypeBot {
                                 if (text===""){
                                     this.doRichContentResponse(session,"je crois que tu t'es troumbé!");
                                 } else {
-                                    this.doRichContentResponse(session,ttt);
+                                    this.doRichContentResponse(session,text);
                                 }
                             })
                             .catch(error =>{
                                 console.log('ERROR:', error);
                             });
+                    } else if (intentName==="hiiiii"){
+                        let ttt=response.result.fullfillment.messages.payload.skype.text;
+                        this.doRichContentResponse(session,ttt);
+
                     } else if (SkypeBot.isDefined(responseText)) {
                         this.doRichContentResponse(session,responseText);
                     } else {
