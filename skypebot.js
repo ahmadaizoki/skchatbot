@@ -11,6 +11,7 @@ var options = {
 };
 var pgp = require('pg-promise')(options);
 var db=pgp(process.env.DATABASE_URL);
+var db1=pgp(process.env.DATABASE_URL);
 
 module.exports = class SkypeBot {
 
@@ -100,7 +101,7 @@ module.exports = class SkypeBot {
                 if (this._botConfig.devConfig) {
                     console.log(sender, "Received api.ai response");
                 }
-                db.any(`SELECT name,role FROM role WHERE name='${username}'`)
+                db1.any(`SELECT name,role FROM role WHERE name='${username}'`)
                     .then(data1=>{
                         let role=data1[0].role;
                         console.log(role);
