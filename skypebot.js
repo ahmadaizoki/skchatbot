@@ -106,10 +106,6 @@ module.exports = class SkypeBot {
                 db1.any(`SELECT name,role FROM role WHERE name='${username}'`)
                     .then(data1=>{
                         let role=data1[0].role;
-                        roletest=role;
-                        if (role){
-                            console.log("coucou");
-                        }
                         if (SkypeBot.isDefined(response.result) && SkypeBot.isDefined(response.result.fulfillment)) {
                             let responseText = response.result.fulfillment.speech;
                             let responseMessages = response.result.fulfillment.messages;
@@ -200,7 +196,7 @@ module.exports = class SkypeBot {
                                     .catch(error =>{
                                         console.log('ERROR:', error);
                                     });
-                            } else if (intentName==="list" && roletest==="admin") {
+                            } else if (intentName==="list" && role) {
                                 let table=response.result.parameters.table1;
                                 table=table.toLowerCase();
                                 db.any(config.selectAll)
@@ -217,8 +213,7 @@ module.exports = class SkypeBot {
                                     .catch(error =>{
                                         console.log('ERROR:', error);
                                     });
-                            } else if(intentName==="list" && role!=="admin"){
-                                console.log(role);
+                            } else if(intentName==="list" && !role){
                                 this.doRichContentResponse(session,"Vous n'avaez pas les droits de completer cet action!");
                             }
                             else if (SkypeBot.isDefined(responseText)) {
