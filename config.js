@@ -5,4 +5,6 @@ module.exports={
     APP_SECRET:"dDyoxh9pDoScyJt5fWcbNd5",
     fichier:'Exemple.xlsx',
     selectAll:'SELECT * FROM projet',
+    messageAccess:"Vous n'avez pas les droits de completer cet action!",
+    messageError:"je crois que tu t'es troumbé!",
 }

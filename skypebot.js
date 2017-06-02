@@ -147,7 +147,7 @@ module.exports = class SkypeBot {
                                             text=text+data[i].personne+" ";
                                         }
                                         if (text===""){
-                                            this.doRichContentResponse(session,"je crois que tu t'es troumbé!");
+                                            this.doRichContentResponse(session,config.messageError);
                                         } else {
                                             this.doRichContentResponse(session,text);
                                         }
@@ -174,7 +174,7 @@ module.exports = class SkypeBot {
                                             text=text+"La personne: "+data[i].personne+" et ca fonction: "+data[i].fonction+" ";
                                         }
                                         if (text===""){
-                                            this.doRichContentResponse(session,"je crois que tu t'es troumbé!");
+                                            this.doRichContentResponse(session,config.messageError);
                                         } else {
                                             this.doRichContentResponse(session,text);
                                         }
@@ -193,7 +193,7 @@ module.exports = class SkypeBot {
                                             text=text+"Le projet: "+data[i].projet+" et ca fonction: "+data[i].fonction+" ";
                                         }
                                         if (text===""){
-                                            this.doRichContentResponse(session,"je crois que tu t'es troumbé!");
+                                            this.doRichContentResponse(session,config.messageError);
                                         } else {
                                             this.doRichContentResponse(session,text);
                                         }
@@ -210,7 +210,7 @@ module.exports = class SkypeBot {
                                             text=text+"Le projet: "+data[i].projet+" et la fonction: "+data[i].fonction+" et le prenom nom: "+data[i].personne+" ";
                                         }
                                         if (text===""){
-                                            this.doRichContentResponse(session,"je crois que tu t'es troumbé!");
+                                            this.doRichContentResponse(session,config.messageError);
                                         } else {
                                             this.doRichContentResponse(session,text);
                                         }
@@ -219,7 +219,7 @@ module.exports = class SkypeBot {
                                         console.log('ERROR:', error);
                                     });
                             } else if(intentName==="list" && !role){
-                                this.doRichContentResponse(session,"Vous n'avaez pas les droits de completer cet action!");
+                                this.doRichContentResponse(session,config.messageAccess);
                             }
                             else if (SkypeBot.isDefined(responseText)) {
                                 this.doRichContentResponse(session,responseText);
