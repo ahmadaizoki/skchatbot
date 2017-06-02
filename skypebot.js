@@ -135,7 +135,6 @@ module.exports = class SkypeBot {
                                 } else {
                                     projet = projet1 + " " + projet2 + " " + projet3;
                                 }
-                                console.log(role);
                                 db.any(`SELECT personne FROM projet WHERE projet='${projet}' AND fonction='${fonction}'`)
                                     .then(data => {
                                         for (var i in data){
@@ -214,6 +213,7 @@ module.exports = class SkypeBot {
                                         console.log('ERROR:', error);
                                     });
                             } else if(intentName==="list" && role!=="admin"){
+                                console.log(role);
                                 this.doRichContentResponse(session,"Vous n'avaez pas les droits de completer cet action!");
                             }
                             else if (SkypeBot.isDefined(responseText)) {
