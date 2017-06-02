@@ -10,8 +10,9 @@ var options = {
     promiseLib: promise
 };
 var pgp = require('pg-promise')(options);
+var pgp1=require('pg-promise')(options);
 var db=pgp(process.env.DATABASE_URL);
-var db1=pgp(process.env.DATABASE_URL);
+var db1=pgp1(process.env.DATABASE_URL);
 
 module.exports = class SkypeBot {
 
