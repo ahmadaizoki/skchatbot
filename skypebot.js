@@ -75,6 +75,7 @@ module.exports = class SkypeBot {
 
         let messageText = session.message.text;
         let sender = session.message.address.conversation.id;
+        let username=session.message.user.name;
         console.log(session.message.user.name);
 
         if (messageText && sender) {
@@ -98,6 +99,13 @@ module.exports = class SkypeBot {
                 if (this._botConfig.devConfig) {
                     console.log(sender, "Received api.ai response");
                 }
+                db.any(`SELECT name,role FROM user WHERE name='${username}'`)
+                    .then(data=>{
+                        console.log(data);
+                    })
+                    .catch(error =>{
+                        console.log('ERROR:', error);
+                    });
 
                 if (SkypeBot.isDefined(response.result) && SkypeBot.isDefined(response.result.fulfillment)) {
                     let responseText = response.result.fulfillment.speech;
