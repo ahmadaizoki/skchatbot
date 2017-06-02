@@ -75,7 +75,7 @@ module.exports = class SkypeBot {
 
         let messageText = session.message.text;
         let sender = session.message.address.conversation.id;
-        console.log(sender);
+        console.log(session.message);
 
         if (messageText && sender) {
 
