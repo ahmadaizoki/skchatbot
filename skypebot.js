@@ -100,8 +100,10 @@ module.exports = class SkypeBot {
                     console.log(sender, "Received api.ai response");
                 }
                 db.any(`SELECT name,role FROM role WHERE name='${username}'`)
-                    .then(data=>{
-                        console.log(data);
+                    .then(data1=>{
+                        let role=data1[0].role;
+                        console.log(role);
+
                     })
                     .catch(error =>{
                         console.log('ERROR:', error);
