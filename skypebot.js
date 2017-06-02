@@ -105,13 +105,13 @@ module.exports = class SkypeBot {
                 db1.any(`SELECT name,role FROM role WHERE name='${username}'`)
                     .then(data1=>{
                         let role=data1[0].role;
-                        console.log(role);
                         if (SkypeBot.isDefined(response.result) && SkypeBot.isDefined(response.result.fulfillment)) {
                             let responseText = response.result.fulfillment.speech;
                             let responseMessages = response.result.fulfillment.messages;
                             let intentName=response.result.metadata.intentName;
                             let responses;
                             let text="";
+                            console.log(role);
 
                             if(intentName==="projet_fonction") {
                                 let fonction;
