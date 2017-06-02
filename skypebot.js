@@ -79,6 +79,7 @@ module.exports = class SkypeBot {
         let sender = session.message.address.conversation.id;
         let name=session.message.user.name;
         let username=name.toLowerCase();
+        let roletest="";
         console.log(session.message.user.name);
 
         if (messageText && sender) {
@@ -105,6 +106,7 @@ module.exports = class SkypeBot {
                 db1.any(`SELECT name,role FROM role WHERE name='${username}'`)
                     .then(data1=>{
                         let role=data1[0].role;
+                        roletest=role;
                         if (SkypeBot.isDefined(response.result) && SkypeBot.isDefined(response.result.fulfillment)) {
                             let responseText = response.result.fulfillment.speech;
                             let responseMessages = response.result.fulfillment.messages;
@@ -195,7 +197,7 @@ module.exports = class SkypeBot {
                                     .catch(error =>{
                                         console.log('ERROR:', error);
                                     });
-                            } else if (intentName==="list" && role==="admin") {
+                            } else if (intentName==="list" && roletest==="admin") {
                                 let table=response.result.parameters.table1;
                                 table=table.toLowerCase();
                                 db.any(config.selectAll)
@@ -212,10 +214,10 @@ module.exports = class SkypeBot {
                                     .catch(error =>{
                                         console.log('ERROR:', error);
                                     });
-                            } /*else if(intentName==="list" && role!=="admin"){
+                            } else if(intentName==="list" && role!=="admin"){
                                 console.log(role);
                                 this.doRichContentResponse(session,"Vous n'avaez pas les droits de completer cet action!");
-                            }*/
+                            }
                             else if (SkypeBot.isDefined(responseText)) {
                                 this.doRichContentResponse(session,responseText);
                             } else {
