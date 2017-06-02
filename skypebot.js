@@ -212,10 +212,10 @@ module.exports = class SkypeBot {
                                     .catch(error =>{
                                         console.log('ERROR:', error);
                                     });
-                            } else if(intentName==="list" && role!=="admin"){
+                            } /*else if(intentName==="list" && role!=="admin"){
                                 console.log(role);
                                 this.doRichContentResponse(session,"Vous n'avaez pas les droits de completer cet action!");
-                            }
+                            }*/
                             else if (SkypeBot.isDefined(responseText)) {
                                 this.doRichContentResponse(session,responseText);
                             } else {
