@@ -75,6 +75,7 @@ module.exports = class SkypeBot {
 
         let messageText = session.message.text;
         let sender = session.message.address.conversation.id;
+        console.log(sender);
 
         if (messageText && sender) {
 
@@ -205,10 +206,6 @@ module.exports = class SkypeBot {
                             .catch(error =>{
                                 console.log('ERROR:', error);
                             });
-                    } else if (intentName==="hiiiii"){
-                        let ttt=response.result.fulfillment.speech;
-                        this.doRichContentResponse(session,ttt);
-
                     } else if (SkypeBot.isDefined(responseText)) {
                         this.doRichContentResponse(session,responseText);
                     } else {
