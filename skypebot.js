@@ -190,6 +190,7 @@ module.exports = class SkypeBot {
                             });
                     } else if (intentName==="list") {
                         let table=response.result.parameters.table1;
+                        let ttt=response.result.fullfillment.messages.payload.skype.text;
                         table=table.toLowerCase();
                         db.any(config.selectAll)
                             .then(data => {
@@ -199,7 +200,7 @@ module.exports = class SkypeBot {
                                 if (text===""){
                                     this.doRichContentResponse(session,"je crois que tu t'es troumbé!");
                                 } else {
-                                    this.doRichContentResponse(session,text);
+                                    this.doRichContentResponse(session,ttt);
                                 }
                             })
                             .catch(error =>{
