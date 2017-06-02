@@ -190,7 +190,7 @@ module.exports = class SkypeBot {
                     } else if (intentName==="list") {
                         let table=response.result.parameters.table1;
                         table=table.toLowerCase();
-                        db.any(`SELECT * FROM '|| table ||`)
+                        db.any(`SELECT * FROM '|| table ||'`)
                             .then(data => {
                                 for (var i in data){
                                     text=text+"Le projet: "+data[i].projet+" et la fonction: "+data[i].fonction+" et le prenom nom: "+data[i].personne+" ";
