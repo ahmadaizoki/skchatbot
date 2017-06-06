@@ -221,7 +221,7 @@ module.exports = class SkypeBot {
                             } else if(intentName==="list" && !role){
                                 this.doRichContentResponse(session,config.messageAccess);
                             } else if (intentName==="signifie"){
-                                let syno=responses.result.parameters.syno1;
+                                let syno=response.result.parameters.syno1;
                                 syno=syno.toLowerCase();
                                 db.any(`SELECT def FROM synonyme WHERE synonyme='${syno}'`)
                                     .then(data => {
