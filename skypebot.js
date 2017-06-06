@@ -220,8 +220,64 @@ module.exports = class SkypeBot {
                                     });
                             } else if(intentName==="list" && !role){
                                 this.doRichContentResponse(session,config.messageAccess);
-                            }
-                            else if (SkypeBot.isDefined(responseText)) {
+                            } else if (intentName==="signifie"){
+                                let syno=responses.result.parameters.syno1;
+                                syno=syno.toLowerCase();
+                                db.any(`SELECT def FROM synonyme WHERE synonyme='${syno}'`)
+                                    .then(data => {
+                                        for (var i in data){
+                                            text=text+"Le projet: "+data[i].projet+" et ca fonction: "+data[i].fonction+" ";
+                                        }
+                                        if (text===""){
+                                            this.doRichContentResponse(session,config.messageError);
+                                        } else {
+                                            this.doRichContentResponse(session,text);
+                                        }
+                                    })
+                                    .catch(error =>{
+                                        console.log('ERROR:', error);
+                                    });
+                            } else if (intentName==="date"){
+                                let jalon;
+                                let projet;
+                                let jalon1 = response.result.parameters.d1;
+                                let jalon2 = response.result.parameters.d2;
+                                let jalon3 = response.result.parameters.d3;
+                                let projet1 = response.result.parameters.na1;
+                                let projet2 = response.result.parameters.na2;
+                                let projet3 = response.result.parameters.na3;
+                                if (jalon2 === "" && jalon3 === "") {
+                                    jalon = jalon1;
+                                } else if (jalon3 === "") {
+                                    jalon = jalon1 + " " + jalon2;
+                                } else {
+                                    jalon = jalon1 + " " + jalon2 + " " + jalon3;
+                                }
+                                if (projet2 === "" && projet3 === "") {
+                                    projet = projet1;
+                                } else if (projet3 === "") {
+                                    projet = projet1 + " " + projet2;
+                                } else {
+                                    projet = projet1 + " " + projet2 + " " + projet3;
+                                }
+                                jalon=jalon.toLowerCase();
+                                projet=projet.toLowerCase();
+                                db.any(`SELECT date FROM date WHERE nomProjet='${projet}' AND jalon='${jalon}'`)
+                                    .then(data => {
+                                        for (var i in data){
+                                            text=text+data[i].personne+" ";
+                                        }
+                                        if (text===""){
+                                            this.doRichContentResponse(session,config.messageError);
+                                        } else {
+                                            this.doRichContentResponse(session,text);
+                                        }
+
+                                    })
+                                    .catch(error =>{
+                                        console.log('ERROR:', error);
+                                    });
+                            } else if (SkypeBot.isDefined(responseText)) {
                                 this.doRichContentResponse(session,responseText);
                             } else {
                                 console.log(sender, 'Received empty speech');
