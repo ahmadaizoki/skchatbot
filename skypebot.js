@@ -226,7 +226,7 @@ module.exports = class SkypeBot {
                                 db.any(`SELECT def FROM synonyme WHERE synonyme='${syno}'`)
                                     .then(data => {
                                         for (var i in data){
-                                            text=text+"Le projet: "+data[i].projet+" et ca fonction: "+data[i].fonction+" ";
+                                            text=text+data[i].def+" ";
                                         }
                                         if (text===""){
                                             this.doRichContentResponse(session,config.messageError);
@@ -265,7 +265,7 @@ module.exports = class SkypeBot {
                                 db.any(`SELECT date FROM date WHERE nomProjet='${projet}' AND jalon='${jalon}'`)
                                     .then(data => {
                                         for (var i in data){
-                                            text=text+data[i].personne+" ";
+                                            text=text+data[i].date+" ";
                                         }
                                         if (text===""){
                                             this.doRichContentResponse(session,config.messageError);
