@@ -141,6 +141,8 @@ module.exports = class SkypeBot {
                                 } else {
                                     projet = projet1 + " " + projet2 + " " + projet3;
                                 }
+                                fonction=fonction.toLowerCase();
+                                projet=projet.toLowerCase();
                                 db.any(`SELECT personne FROM projet WHERE projet='${projet}' AND fonction='${fonction}'`)
                                     .then(data => {
                                         for (var i in data){
@@ -168,6 +170,7 @@ module.exports = class SkypeBot {
                                 }else {
                                     projet=projet1+" "+projet2+" "+projet3;
                                 }
+                                projet=projet.toLowerCase();
                                 db.any(`SELECT personne,fonction FROM projet WHERE projet='${projet}'`)
                                     .then(data => {
                                         for (var i in data){
@@ -187,6 +190,7 @@ module.exports = class SkypeBot {
                                 let prenom=response.result.parameters.prenom1;
                                 let nom=response.result.parameters.nom1;
                                 personne=prenom+" "+nom;
+                                personne=personne.toLowerCase();
                                 db.any(`SELECT projet,fonction FROM projet WHERE personne='${personne}'`)
                                     .then(data => {
                                         for (var i in data){
