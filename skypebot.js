@@ -101,7 +101,7 @@ module.exports = class SkypeBot {
 
             apiaiRequest.on('response', (response) => {
                 if (this._botConfig.devConfig) {
-                    console.log(sender, "Received api.ai response");
+                    console.log(sender, "Recevoir api.ai reponse");
                 }
                 db1.any(`SELECT name,role FROM role WHERE name='${username}'`)
                     .then(data1=>{
@@ -262,7 +262,7 @@ module.exports = class SkypeBot {
                                 }
                                 jalon=jalon.toLowerCase();
                                 projet=projet.toLowerCase();
-                                db.any(`SELECT date FROM date WHERE nomProjet='${projet}' AND jalon='${jalon}'`)
+                                db.any(`SELECT date FROM date WHERE nomprojet='${projet}' AND jalon='${jalon}'`)
                                     .then(data => {
                                         for (var i in data){
                                             text=text+data[i].date+" ";
@@ -280,10 +280,10 @@ module.exports = class SkypeBot {
                             } else if (SkypeBot.isDefined(responseText)) {
                                 this.doRichContentResponse(session,responseText);
                             } else {
-                                console.log(sender, 'Received empty speech');
+                                console.log(sender, 'Recevoir message vide');
                             }
                         } else {
-                            console.log(sender, 'Received empty result');
+                            console.log(sender, 'Recevoir resulta vide');
                         }
 
                     })
@@ -295,12 +295,12 @@ module.exports = class SkypeBot {
             });
 
             apiaiRequest.on('error', (error) => {
-                console.error(sender, 'Error while call to api.ai', error);
+                console.error(sender, 'Error quand essayer de connecter avec api.ai', error);
             });
 
             apiaiRequest.end();
         } else {
-            console.log('Empty message');
+            console.log('Message vide');
         }
     }
 

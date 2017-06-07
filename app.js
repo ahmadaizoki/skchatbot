@@ -32,5 +32,5 @@ app.use(bodyParser.json());
 app.post('/chat', skypeBot.botService.listen());
 
 app.listen(REST_PORT, function () {
-    console.log('Rest service ready on port ' + REST_PORT);
+    console.log('La service sur la port ' + REST_PORT);
 });

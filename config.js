@@ -6,5 +6,5 @@ module.exports={
     fichier:'Exemple.xlsx',
     selectAll:'SELECT * FROM projet',
     messageAccess:"Vous n'avez pas les droits de completer cet action!",
-    messageError:"je crois que tu t'es troumbé!",
+    messageError:"Je crois que tu t'es troumbé!",
 }
