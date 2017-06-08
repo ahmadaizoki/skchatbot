@@ -1,18 +1,17 @@
 'use strict';
 
-const apiai = require('apiai');
-const config=require('./config');
-const uuid = require('node-uuid');
-const botbuilder = require('botbuilder');
-var promise = require('bluebird');
+const apiai = require('apiai');  //pour se connecter avec l'api.ai
+const config=require('./config');  //l'access au fichier de configuration
+const uuid = require('node-uuid');  //framework pour générer  RFC4122 UUIDS
+const botbuilder = require('botbuilder');  //framework pour developper les bots
+var promise = require('bluebird');  //framework pour utuliser les promises
 var options = {
-    // Initialization Options
     promiseLib: promise
 };
-var pgp = require('pg-promise')(options);
-var pgp1=require('pg-promise')(options);
-var db=pgp(process.env.DATABASE_URL);
-var db1=pgp1(process.env.DATABASE_URL);
+var pgp = require('pg-promise')(options);  //pour se connecter a la base de données
+var pgp1=require('pg-promise')(options);  //pour se connecter a la base de données
+var db=pgp(process.env.DATABASE_URL);  //se connecter a la base de donnée
+var db1=pgp1(process.env.DATABASE_URL);  //se connecter a la base de donnée
 
 module.exports = class SkypeBot {
 
@@ -73,6 +72,7 @@ module.exports = class SkypeBot {
 
     }
 
+    //Gerer le message recevoir de skype
     processMessage(session) {
 
         let messageText = session.message.text;
@@ -99,6 +99,7 @@ module.exports = class SkypeBot {
                     }
                 });
 
+            //Gerer la reponse
             apiaiRequest.on('response', (response) => {
                 if (this._botConfig.devConfig) {
                     console.log(sender, "Recevoir api.ai reponse");
@@ -118,6 +119,7 @@ module.exports = class SkypeBot {
                             let responses;
                             let text="";
 
+                            //Traiter la reponse pour chaque intent dans l'api.ai
                             if(intentName==="projet_fonction") {
                                 let fonction;
                                 let projet;
@@ -308,10 +310,12 @@ module.exports = class SkypeBot {
         }
     }
 
+    //Envoyer la reponse vers skype
     doRichContentResponse(session, messages) {
         session.send(messages);
     }
 
+    //Si l'action est définie ou pas définie
     static isDefined(obj) {
         if (typeof obj == 'undefined') {
             return false;

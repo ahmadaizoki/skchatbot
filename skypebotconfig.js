@@ -1,5 +1,6 @@
 'use strict';
 
+//verifier les droits de connextions entre api.ai ,le serveur et skype
 module.exports = class SkypeBotConfig {
 
     get apiaiAccessToken() {

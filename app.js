@@ -1,19 +1,15 @@
 'use strict';
 
-const apiai = require('apiai');
-const express = require('express');
-const bodyParser = require('body-parser');
-
-const SkypeBot = require('./skypebot');
-const SkypeBotConfig = require('./skypebotconfig');
-const config=require('./config');
-const pg =require('pg');
-
-
-pg.defaults.ssl=true;
+const apiai = require('apiai');  //pour se connecter avec l'api.ai
+const express = require('express');  //framework pour developper les applications web
+const bodyParser = require('body-parser');  //framework pour créer des middlewares
+const SkypeBot = require('./skypebot');  //le code pour traiter la connextion et les messages entre l'api et skype
+const SkypeBotConfig = require('./skypebotconfig');  //le code de verification
+const config=require('./config');  //l'access au fichier de configuration
 
 const REST_PORT = (process.env.PORT || 5000);
 
+//Verifier les droits
 const botConfig = new SkypeBotConfig(
     config.APIAI_ACCESS_TOKEN,
     config.APIAI_LANG,
@@ -31,6 +27,7 @@ app.use(bodyParser.json());
 
 app.post('/chat', skypeBot.botService.listen());
 
+// Connéxion au serveur
 app.listen(REST_PORT, function () {
     console.log('La service sur la port ' + REST_PORT);
 });
