@@ -316,7 +316,7 @@ module.exports = class SkypeBot {
                                 if (personne==="" || fonction==="" || projet===""){
                                     this.doRichContentResponse(session,config.messageError);
                                 } else {
-                                    db.any(`INSERT INTO projet projet,fonction,personne WHERE projet='${projet}' AND fonction='${fonction}' AND personne='${personne}'`)
+                                    db.any(`INSERT projet,fonction,personne INTO projet WHERE projet='${projet}' AND fonction='${fonction}' AND personne='${personne}'`)
                                         .then(data=>{
                                             this.doRichContentResponse(session,responseText);
                                         })
