@@ -338,7 +338,7 @@ module.exports = class SkypeBot {
 
                     })
                     .catch(error =>{
-                        console.log('ERROR:', error);
+                        console.log('ERROR1:', error);
                     });
 
 
