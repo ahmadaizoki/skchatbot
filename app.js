@@ -1,8 +1,8 @@
 'use strict';
 
 const apiai = require('apiai');  //pour se connecter avec l'api.ai
-const express = require('express');  //framework pour developper les applications web
-const bodyParser = require('body-parser');  //framework pour créer des middlewares
+const express = require('express');  //framework pour développer les applications web
+const bodyParser = require('body-parser');  //framework pour créer des middlewares pour parser les requests données
 const SkypeBot = require('./skypebot');  //le code pour traiter la connextion et les messages entre l'api et skype
 const SkypeBotConfig = require('./skypebotconfig');  //le code de verification
 const config=require('./config');  //l'access au fichier de configuration
