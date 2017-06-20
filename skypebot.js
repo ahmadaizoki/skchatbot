@@ -6,7 +6,6 @@ const config=require('./config');  //l'access au fichier de configuration
 const uuid = require('node-uuid');  //framework pour générer  RFC4122 UUIDS
 const botbuilder = require('botbuilder');  //framework pour développer les bots
 var promise = require('bluebird');  //framework pour utiliser les promises
-var s=require('string')
 var options = {
     promiseLib: promise
 };
@@ -15,6 +14,7 @@ var pgp1=require('pg-promise')(options);  //pour se connecter a la base de donn�
 var db=pgp(process.env.DATABASE_URL);  //se connecter a la base de données
 var db1=pgp1(process.env.DATABASE_URL);  //se connecter a la base de données
 var db2=pgp1(process.env.DATABASE_URL);  //se connecter a la base de données
+var selectt=require('./select');
 
 module.exports = class SkypeBot {
 
@@ -70,6 +70,7 @@ module.exports = class SkypeBot {
         this._bot.dialog('/', (session) => {
             if (session.message && session.message.text) {
                 this.processMessage(session);
+                select;
             }
         });
 
@@ -150,16 +151,14 @@ module.exports = class SkypeBot {
                                 fonction=fonction.toLowerCase();
                                 projet=projet.toLowerCase();
                                 console.log(fonction);
-                                let id;
 
-                                db2.any(`SELECT id FROM raccourcis WHERE fonction='${fonction}' OR rec1='${fonction}' OR rec2='${fonction}' OR rec3='${fonction}' OR rec4='${fonction}' OR rec5='${fonction}'`)
+                                db2.any(`SELECT fonction FROM raccourcis WHERE fonction='${fonction}' OR rec1='${fonction}' OR rec2='${fonction}' OR rec3='${fonction}' OR rec4='${fonction}' OR rec5='${fonction}'`)
                                     .then(data2 =>{
                                       for (var j in data2){
-                                        console.log(data2[j].id);
-                                        id=data2[j].id;
+                                        console.log(data2[j].fonction);
+                                        fonction=data2[j].fonction;
                                       };
-                                      fonction9=s(fonction);
-                                      db.any(`SELECT personne FROM projet WHERE id='${id}'`)
+                                      db.any(`SELECT personne FROM projet WHERE projet='${projet}' AND fonction='${fonction}'`)
                                           .then(data => {
                                               console.log(data);
                                               for (var i in data){
