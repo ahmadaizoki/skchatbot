@@ -6,6 +6,7 @@ const config=require('./config');  //l'access au fichier de configuration
 const uuid = require('node-uuid');  //framework pour générer  RFC4122 UUIDS
 const botbuilder = require('botbuilder');  //framework pour développer les bots
 var promise = require('bluebird');  //framework pour utiliser les promises
+var s=require('string')
 var options = {
     promiseLib: promise
 };
@@ -156,7 +157,7 @@ module.exports = class SkypeBot {
                                         console.log(data2[j].fonction);
                                         fonction=data2[j].fonction;
                                       };
-                                      fonction9=fonction9.join(fonction);
+                                      fonction9=s(fonction);
                                       db.any(`SELECT personne FROM projet WHERE projet='${projet}' AND fonction='${fonction9}'`)
                                           .then(data => {
                                               console.log(data);
