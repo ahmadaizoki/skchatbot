@@ -81,6 +81,7 @@ module.exports = class SkypeBot {
         let username=name.toLowerCase();
         let roletest="";
         console.log(session.message.user.name);
+        console.log(session.message);
 
         if (messageText && sender) {
 
@@ -118,7 +119,6 @@ module.exports = class SkypeBot {
                             let intentName=response.result.metadata.intentName;
                             let responses;
                             let text="";
-                            console.log(response.result.fulfillment.messages);
 
                             //Traiter la reponse pour chaque intent dans l'api.ai
                             if(intentName==="projet_fonction") {
