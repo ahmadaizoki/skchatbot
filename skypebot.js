@@ -12,6 +12,7 @@ var pgp = require('pg-promise')(options);  //pour se connecter a la base de donn
 var pgp1=require('pg-promise')(options);  //pour se connecter a la base de données
 var db=pgp(process.env.DATABASE_URL);  //se connecter a la base de données
 var db1=pgp1(process.env.DATABASE_URL);  //se connecter a la base de données
+var db2=pgp1(process.env.DATABASE_URL);  //se connecter a la base de données
 
 module.exports = class SkypeBot {
 
@@ -145,10 +146,10 @@ module.exports = class SkypeBot {
                                 }
                                 fonction=fonction.toLowerCase();
                                 projet=projet.toLowerCase();
-                                db.any(`SELECT fonction FROM raccourcis WHERE fonction='${fonction}' OR rec1='${fonction}' OR rec2='${fonction}' OR rec3='${fonction}' OR rec4='${fonction}' OR rec5='${fonction}'`)
+                                db2.any(`SELECT fonction FROM raccourcis WHERE fonction='${fonction}' OR rec1='${fonction}' OR rec2='${fonction}' OR rec3='${fonction}' OR rec4='${fonction}' OR rec5='${fonction}'`)
                                     .then(data2 =>{
                                       console.log(data2[0].fonction);
-                                       let fonction9=data2[0].fonction;
+                                      let fonction9=data2[0].fonction;
                                       db.any(`SELECT personne FROM projet WHERE projet='${projet}' AND fonction='${fonction9}'`)
                                           .then(data => {
                                               for (var i in data){
