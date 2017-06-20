@@ -70,7 +70,6 @@ module.exports = class SkypeBot {
         this._bot.dialog('/', (session) => {
             if (session.message && session.message.text) {
                 this.processMessage(session);
-                console.log(selectt.getPersonne(session.message));
             }
         });
 
@@ -150,33 +149,21 @@ module.exports = class SkypeBot {
                                 }
                                 fonction=fonction.toLowerCase();
                                 projet=projet.toLowerCase();
-                                console.log(fonction);
+                                db.any(`SELECT personne FROM projet WHERE projet='${projet}' AND fonction='${fonction}'`)
+                                    .then(data => {
+                                        console.log(data);
+                                        for (var i in data){
+                                            text=text+data[i].personne+" ";
+                                        }
+                                        if (text===""){
+                                            this.doRichContentResponse(session,config.messageError);
+                                        } else {
+                                            this.doRichContentResponse(session,text);
+                                        }
 
-                                db2.any(`SELECT fonction FROM raccourcis WHERE fonction='${fonction}' OR rec1='${fonction}' OR rec2='${fonction}' OR rec3='${fonction}' OR rec4='${fonction}' OR rec5='${fonction}'`)
-                                    .then(data2 =>{
-                                      for (var j in data2){
-                                        console.log(data2[j].fonction);
-                                        fonction=data2[j].fonction;
-                                      };
-                                      db.any(`SELECT personne FROM projet WHERE projet='${projet}' AND fonction='${fonction}'`)
-                                          .then(data => {
-                                              console.log(data);
-                                              for (var i in data){
-                                                  text=text+data[i].personne+" ";
-                                              }
-                                              if (text===""){
-                                                  this.doRichContentResponse(session,config.messageError);
-                                              } else {
-                                                  this.doRichContentResponse(session,text);
-                                              }
-
-                                          })
-                                          .catch(error =>{
-                                              console.log('ERROR:', error);
-                                          });
                                     })
                                     .catch(error =>{
-                                      console.log('ERROR:',error);
+                                        console.log('ERROR:', error);
                                     });
                             } else if(intentName==="projet"){
                                 let projet;
