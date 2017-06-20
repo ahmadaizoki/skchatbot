@@ -146,6 +146,7 @@ module.exports = class SkypeBot {
                                 }
                                 fonction=fonction.toLowerCase();
                                 projet=projet.toLowerCase();
+                                console.log(fonction);
                                 db2.any(`SELECT fonction FROM raccourcis WHERE rec1='${fonction}'`)
                                 //db2.any(`SELECT fonction FROM raccourcis WHERE /*fonction='${fonction}' OR rec1='${fonction}' OR rec2='${fonction}' OR rec3='${fonction}' OR rec4='${fonction}' OR rec5='${fonction}'`)
                                     .then(data2 =>{
