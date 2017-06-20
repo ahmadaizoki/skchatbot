@@ -118,7 +118,7 @@ module.exports = class SkypeBot {
                             let intentName=response.result.metadata.intentName;
                             let responses;
                             let text="";
-                            console.log(message);
+                            console.log(response.result.fulfillment.messages);
 
                             //Traiter la reponse pour chaque intent dans l'api.ai
                             if(intentName==="projet_fonction") {
