@@ -120,6 +120,7 @@ module.exports = class SkypeBot {
                             let intentName=response.result.metadata.intentName;
                             let responses;
                             let text="";
+                            let fonction9="";
 
                             //Traiter la reponse pour chaque intent dans l'api.ai
                             if(intentName==="projet_fonction") {
@@ -148,7 +149,7 @@ module.exports = class SkypeBot {
                                 fonction=fonction.toLowerCase();
                                 projet=projet.toLowerCase();
                                 console.log(fonction);
-                                fonction=char.isAlpha(fonction);
+
                                 db2.any(`SELECT fonction FROM raccourcis WHERE fonction='${fonction}' OR rec1='${fonction}' OR rec2='${fonction}' OR rec3='${fonction}' OR rec4='${fonction}' OR rec5='${fonction}'`)
                                     .then(data2 =>{
                                       for (var j in data2){
@@ -156,8 +157,8 @@ module.exports = class SkypeBot {
                                         fonction=data2[j].fonction;
                                       };
                                       console.log(fonction,projet);
-                                      fonction=fonction.toChar();
-                                      db.any(`SELECT personne FROM projet WHERE projet='${projet}' AND fonction='${fonction}'`)
+                                      fonction9=fonction;
+                                      db.any(`SELECT personne FROM projet WHERE projet='${projet}' AND fonction='${fonction9}'`)
                                           .then(data => {
                                               console.log(data);
                                               for (var i in data){
