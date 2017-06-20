@@ -154,9 +154,10 @@ module.exports = class SkypeBot {
                                     .then(data2 =>{
                                       for (var j in data2){
                                         console.log(data2[j].fonction);
-                                        fonction9=data2[j].fonction;
+                                        fonction=data2[j].fonction;
                                       };
-                                      db.any(`SELECT personne FROM projet WHERE projet='${projet}' AND fonction='${fonction}'`)
+                                      fonction9=fonction9.join(fonction);
+                                      db.any(`SELECT personne FROM projet WHERE projet='${projet}' AND fonction='${fonction9}'`)
                                           .then(data => {
                                               console.log(data);
                                               for (var i in data){
