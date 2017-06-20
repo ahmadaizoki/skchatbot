@@ -145,7 +145,7 @@ module.exports = class SkypeBot {
                                 }
                                 fonction=fonction.toLowerCase();
                                 projet=projet.toLowerCase();
-                                db.any(`SELECT fonction FROM raccourcis WHERE fonction='${fonction}' OR rac1='${fonction}' OR rac2='${fonction}' OR rac3='${fonction}' OR rac4='${fonction}' OR rac5='${fonction}'`)
+                                db.any(`SELECT fonction FROM raccourcis WHERE fonction='${fonction}' OR rec1='${fonction}' OR rec2='${fonction}' OR rec3='${fonction}' OR rec4='${fonction}' OR rec5='${fonction}'`)
                                     .then(data2 =>{
                                       fonction=data2[0].fonction;
                                       db.any(`SELECT personne FROM projet WHERE projet='${projet}' AND fonction='${fonction}'`)
