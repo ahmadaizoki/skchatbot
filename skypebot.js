@@ -330,8 +330,10 @@ module.exports = class SkypeBot {
 
 
                             } else if (intentName==='fuck'){
-                              let url ="./GIF/pardon.gif";
-                                this.doRichContentResponse(session,url)
+                                let url ="./GIF/pardon.gif";
+                                let heroCard = new botbuilder.HeroCard(session).images([botbuilder.CardImage.create(session, url)]);
+                                let msg = new botbuilder.Message(session).attachments([heroCard]);
+                                this.doRichContentResponse(session,msg)
                             } else if (SkypeBot.isDefined(responseText)) {
                                 this.doRichContentResponse(session,responseText);
                             } else {
