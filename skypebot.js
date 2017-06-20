@@ -70,7 +70,7 @@ module.exports = class SkypeBot {
         this._bot.dialog('/', (session) => {
             if (session.message && session.message.text) {
                 this.processMessage(session);
-                console.log(selectt.getPersonne(req,res,next));
+                console.log(selectt.getPersonne(let req,let res,let next));
             }
         });
 
