@@ -81,7 +81,6 @@ module.exports = class SkypeBot {
         let username=name.toLowerCase();
         let roletest="";
         console.log(session.message.user.name);
-        console.log(session.message);
 
         if (messageText && sender) {
 
@@ -330,7 +329,7 @@ module.exports = class SkypeBot {
 
 
                             } else if (intentName==='fuck'){
-                              
+
                             } else if (SkypeBot.isDefined(responseText)) {
                                 this.doRichContentResponse(session,responseText);
                             } else {
