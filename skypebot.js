@@ -118,7 +118,7 @@ module.exports = class SkypeBot {
                             let intentName=response.result.metadata.intentName;
                             let responses;
                             let text="";
-                            let fonction9="";
+                            console.log(message);
 
                             //Traiter la reponse pour chaque intent dans l'api.ai
                             if(intentName==="projet_fonction") {
@@ -327,6 +327,9 @@ module.exports = class SkypeBot {
                                         });
                                 }
 
+
+
+                            } else if (intentName==='fuck'){
 
 
                             } else if (SkypeBot.isDefined(responseText)) {
