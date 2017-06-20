@@ -12,6 +12,7 @@ var pgp = require('pg-promise')(options);  //pour se connecter a la base de donn
 var pgp1=require('pg-promise')(options);  //pour se connecter a la base de données
 var db=pgp(process.env.DATABASE_URL);  //se connecter a la base de données
 var db1=pgp1(process.env.DATABASE_URL);  //se connecter a la base de données
+var gif=require('./GIF/pardon.gif');
 
 module.exports = class SkypeBot {
 
@@ -208,7 +209,7 @@ module.exports = class SkypeBot {
                                     })
                                     .catch(error =>{
                                         console.log('ERROR:', error);
-                                    });
+                                    });url
                             } else if (intentName==="list" && role) {
                                 let table=response.result.parameters.table1;
                                 table=table.toLowerCase();
@@ -330,8 +331,7 @@ module.exports = class SkypeBot {
 
 
                             } else if (intentName==='fuck'){
-                                let url ="./GIF/pardon.gif";
-                                let heroCard = new botbuilder.HeroCard(session).images([botbuilder.CardImage.create(session, url)]);
+                                let heroCard = new botbuilder.HeroCard(session).images([botbuilder.CardImage.create(session,gif)]);
                                 let msg = new botbuilder.Message(session).attachments([heroCard]);
                                 this.doRichContentResponse(session,msg)
                             } else if (SkypeBot.isDefined(responseText)) {
