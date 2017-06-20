@@ -12,7 +12,7 @@ var pgp = require('pg-promise')(options);  //pour se connecter a la base de donn
 var pgp1=require('pg-promise')(options);  //pour se connecter a la base de données
 var db=pgp(process.env.DATABASE_URL);  //se connecter a la base de données
 var db1=pgp1(process.env.DATABASE_URL);  //se connecter a la base de données
-var gif=require('./GIF/pardon.gif');
+var gif=require('./GIF/pardon');
 
 module.exports = class SkypeBot {
 
