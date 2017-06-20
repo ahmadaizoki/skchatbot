@@ -330,8 +330,8 @@ module.exports = class SkypeBot {
 
 
                             } else if (intentName==='fuck'){
-
-
+                              let url ="./GIF/pardon.gif";
+                                this.doRichContentResponse(session,url)
                             } else if (SkypeBot.isDefined(responseText)) {
                                 this.doRichContentResponse(session,responseText);
                             } else {
