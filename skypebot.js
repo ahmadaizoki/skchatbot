@@ -145,20 +145,27 @@ module.exports = class SkypeBot {
                                 }
                                 fonction=fonction.toLowerCase();
                                 projet=projet.toLowerCase();
-                                db.any(`SELECT personne FROM projet WHERE projet='${projet}' AND fonction='${fonction}'`)
-                                    .then(data => {
-                                        for (var i in data){
-                                            text=text+data[i].personne+" ";
-                                        }
-                                        if (text===""){
-                                            this.doRichContentResponse(session,config.messageError);
-                                        } else {
-                                            this.doRichContentResponse(session,text);
-                                        }
+                                db.any(`SELECT fonction FROM raccourcis WHERE fonction='${fonction}' OR rac1='${fonction}' OR rac2='${fonction}' OR rac3='${fonction}' OR rac4='${fonction}' OR rac5='${fonction}'`)
+                                    .then(data2 =>{
+                                      fonction=data2[0].fonction;
+                                      db.any(`SELECT personne FROM projet WHERE projet='${projet}' AND fonction='${fonction}'`)
+                                          .then(data => {
+                                              for (var i in data){
+                                                  text=text+data[i].personne+" ";
+                                              }
+                                              if (text===""){
+                                                  this.doRichContentResponse(session,config.messageError);
+                                              } else {
+                                                  this.doRichContentResponse(session,text);
+                                              }
 
+                                          })
+                                          .catch(error =>{
+                                              console.log('ERROR:', error);
+                                          });
                                     })
                                     .catch(error =>{
-                                        console.log('ERROR:', error);
+                                      console.log('ERROR:',error);
                                     });
                             } else if(intentName==="projet"){
                                 let projet;
