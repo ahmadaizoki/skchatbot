@@ -1,6 +1,5 @@
 'use strict';
 
-const char=require('char');
 const apiai = require('apiai');  //pour se connecter avec l'api.ai
 const config=require('./config');  //l'access au fichier de configuration
 const uuid = require('node-uuid');  //framework pour générer  RFC4122 UUIDS
@@ -13,8 +12,6 @@ var pgp = require('pg-promise')(options);  //pour se connecter a la base de donn
 var pgp1=require('pg-promise')(options);  //pour se connecter a la base de données
 var db=pgp(process.env.DATABASE_URL);  //se connecter a la base de données
 var db1=pgp1(process.env.DATABASE_URL);  //se connecter a la base de données
-var db2=pgp1(process.env.DATABASE_URL);  //se connecter a la base de données
-var selectt=require('./select');
 
 module.exports = class SkypeBot {
 
