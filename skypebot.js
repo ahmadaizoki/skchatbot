@@ -1,5 +1,6 @@
 'use strict';
 
+const char=require('char');
 const apiai = require('apiai');  //pour se connecter avec l'api.ai
 const config=require('./config');  //l'access au fichier de configuration
 const uuid = require('node-uuid');  //framework pour générer  RFC4122 UUIDS
@@ -147,6 +148,7 @@ module.exports = class SkypeBot {
                                 fonction=fonction.toLowerCase();
                                 projet=projet.toLowerCase();
                                 console.log(fonction);
+                                fonction=char.isAlpha(fonction);
                                 db2.any(`SELECT fonction FROM raccourcis WHERE fonction='${fonction}' OR rec1='${fonction}' OR rec2='${fonction}' OR rec3='${fonction}' OR rec4='${fonction}' OR rec5='${fonction}'`)
                                     .then(data2 =>{
                                       for (var j in data2){
