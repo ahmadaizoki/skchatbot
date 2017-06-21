@@ -382,6 +382,7 @@ module.exports = class SkypeBot {
                                  projet=projet.toLowerCase();
                                  fonction=fonction.toLowerCase();
                                  if (fonction==='' && personne===''){
+                                     console.log(projet);
                                      db.any(`DELETE FROM projet WHERE projet='${projet}'`)
                                          .then(data=>{
                                              this.doRichContentResponse(session,responseText);
