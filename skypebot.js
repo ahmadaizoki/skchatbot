@@ -317,7 +317,7 @@ module.exports = class SkypeBot {
                                 if (personne==="" || fonction==="" || projet===""){
                                     this.doRichContentResponse(session,config.messageError);
                                 } else {
-                                    db.any(`SELECT * FROM projet WHERE projet='${projet}' AND fonction='${fonction}' AND personne='${personne}'`)
+                                    db.any(`SELECT projet,personne FROM projet WHERE projet='${projet}' AND fonction='${fonction}' AND personne='${personne}'`)
                                         .then(data2 =>{
                                             if(data2!==''){
                                                 this.doRichContentResponse(session,'Les données existent deja dans la base')
