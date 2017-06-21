@@ -210,7 +210,7 @@ module.exports = class SkypeBot {
                                     .catch(error =>{
                                         console.log('ERROR:', error);
                                         this.doRichContentResponse(session,config.messageServeurErrer);
-                                    });url
+                                    });
                             } else if (intentName==="list" && role) {
                                 let table=response.result.parameters.table1;
                                 table=table.toLowerCase();
