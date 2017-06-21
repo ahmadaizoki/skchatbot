@@ -337,6 +337,33 @@ module.exports = class SkypeBot {
                                 }
                             } else if (intentName==='insert' && !role){
                                  this.doRichContentResponse(session,config.messageAccess);
+                            } else if (intentName==='delete' && role){
+                                 let projet;
+                                 let personne;
+                                 let fonction;
+                                 let projet1=response.result.parameters.projet1;
+                                 let projet2=response.result.parameters.projet2;
+                                 let projet3=response.result.parameters.projet3;
+                                 let prenom=response.result.parameters.prenom1;
+                                 let nom=response.result.parameters.nom1;
+                                 if (projet2 === "" && projet3 === "") {
+                                     projet = projet1;
+                                 } else if (projet3 === "") {
+                                     projet = projet1 + " " + projet2;
+                                 } else {
+                                     projet = projet1 + " " + projet2 + " " + projet3;
+                                 }
+                                 personne=prenom+" "+nom;
+                                 personne=personne.toLowerCase();
+                                 projet=projet.toLowerCase();
+                                 db.any(`DELETE FROM projet WHERE projet='${projet}' AND personne='${personne}'`)
+                                     .then(data=>{
+                                          this.doRichContentResponse(session,responseText);
+                                     })
+                                     .catch(error=>{
+                                          console.log('ERROR':,error);
+                                          this.doRichContentResponse(session,'Désolé il y a quelque chose qui marche pas, veuillez regarder la log de serveur ');
+                                     });
                             } else if (intentName==='fuck'){
 
                             } else if (SkypeBot.isDefined(responseText)) {
