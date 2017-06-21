@@ -382,7 +382,7 @@ module.exports = class SkypeBot {
                                  projet=projet.toLowerCase();
                                  fonction=fonction.toLowerCase();
                                  if (fonction==='' && personne===''){
-                                     console.log(projet);
+                                     console.log('prpr',projet);
                                      db.any(`DELETE FROM projet WHERE projet='${projet}'`)
                                          .then(data=>{
                                              this.doRichContentResponse(session,responseText);
@@ -392,6 +392,7 @@ module.exports = class SkypeBot {
                                              this.doRichContentResponse(session,'Désolé il y a quelque chose qui marche pas, veuillez regarder la log de serveur ');
                                          });
                                  } else if (fonction===''){
+                                     console.log('ppp',personne);
                                      db.any(`DELETE FROM projet WHERE projet='${projet}' AND personne='${personne}'`)
                                          .then(data=>{
                                               this.doRichContentResponse(session,responseText);
@@ -401,7 +402,8 @@ module.exports = class SkypeBot {
                                               this.doRichContentResponse(session,'Désolé il y a quelque chose qui marche pas, veuillez regarder la log de serveur ');
                                          });
                                  } else {
-                                    db.any(`DELETE FROM projet WHERE projet='${projet}' AND fonction='${fonction}' AND personne='${personne}'`)
+                                     console.log('fff',fonction);
+                                     db.any(`DELETE FROM projet WHERE projet='${projet}' AND fonction='${fonction}' AND personne='${personne}'`)
                                         .then(data=>{
                                             this.doRichContentResponse(session,responseText);
                                         })
