@@ -288,7 +288,7 @@ module.exports = class SkypeBot {
                                 let projet;
                                 let fonction;
                                 let personne;
-                                let text;
+                                let text='';
                                 let projet1=response.result.parameters.projet1;
                                 let projet2=response.result.parameters.projet2;
                                 let projet3=response.result.parameters.projet3;
