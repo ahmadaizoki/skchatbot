@@ -321,19 +321,20 @@ module.exports = class SkypeBot {
                                         .then(data2 =>{
                                             if(data2!==''){
                                                 this.doRichContentResponse(session,'Les données existent deja dans la base')
+                                            }else{
+                                                db.any(`INSERT INTO projet (projet,fonction,personne) VALUES ('${projet}','${fonction}','${personne}')`)
+                                                    .then(data=>{
+                                                        this.doRichContentResponse(session,responseText);
+                                                    })
+                                                    .catch(error =>{
+                                                        console.log('ERROR:', error);
+                                                    });
                                             }
-                                         });
-                                    db.any(`INSERT INTO projet (projet,fonction,personne) VALUES ('${projet}','${fonction}','${personne}')`)
-                                        .then(data=>{
-                                            this.doRichContentResponse(session,responseText);
                                         })
                                         .catch(error =>{
                                             console.log('ERROR:', error);
-                                        });
+                                        })
                                 }
-
-
-
                             } else if (intentName==='fuck'){
 
                             } else if (SkypeBot.isDefined(responseText)) {
