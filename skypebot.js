@@ -118,11 +118,13 @@ module.exports = class SkypeBot {
                             let intentName=response.result.metadata.intentName;
                             let responses;
                             let text="";
+                            let projet;
+                            let fonction;
+                            let personne;
+                            let jalon;
 
                             //Traiter la reponse pour chaque intent dans l'api.ai
                             if(intentName==="projet_fonction") {
-                                let fonction;
-                                let projet;
                                 let fonction1 = response.result.parameters.fonction1;
                                 let fonction2 = response.result.parameters.fonction2;
                                 let fonction3 = response.result.parameters.fonction3;
@@ -160,10 +162,9 @@ module.exports = class SkypeBot {
                                     })
                                     .catch(error =>{
                                         console.log('ERROR:', error);
-                                        this.doRichContentResponse(session,'Désolé il y a quelque chose qui marche pas, veuillez regarder la log de serveur ');
+                                        this.doRichContentResponse(session,config.messageServeurErrer);
                                     });
                             } else if(intentName==="projet"){
-                                let projet;
                                 let projet1=response.result.parameters.projet1;
                                 let projet2=response.result.parameters.projet2;
                                 let projet3=response.result.parameters.projet3;
@@ -188,10 +189,9 @@ module.exports = class SkypeBot {
                                     })
                                     .catch(error =>{
                                         console.log('ERROR:', error);
-                                        this.doRichContentResponse(session,'Désolé il y a quelque chose qui marche pas, veuillez regarder la log de serveur ');
+                                        this.doRichContentResponse(session,config.messageServeurErrer);
                                     });
                             } else if (intentName==="personne"){
-                                let personne;
                                 let prenom=response.result.parameters.prenom1;
                                 let nom=response.result.parameters.nom1;
                                 personne=prenom+" "+nom;
@@ -209,7 +209,7 @@ module.exports = class SkypeBot {
                                     })
                                     .catch(error =>{
                                         console.log('ERROR:', error);
-                                        this.doRichContentResponse(session,'Désolé il y a quelque chose qui marche pas, veuillez regarder la log de serveur ');
+                                        this.doRichContentResponse(session,config.messageServeurErrer);
                                     });url
                             } else if (intentName==="list" && role) {
                                 let table=response.result.parameters.table1;
@@ -227,7 +227,7 @@ module.exports = class SkypeBot {
                                     })
                                     .catch(error =>{
                                         console.log('ERROR:', error);
-                                        this.doRichContentResponse(session,'Désolé il y a quelque chose qui marche pas, veuillez regarder la log de serveur ');
+                                        this.doRichContentResponse(session,config.messageServeurErrer);
                                     });
                             } else if(intentName==="list" && !role){
                                 this.doRichContentResponse(session,config.messageAccess);
@@ -247,11 +247,9 @@ module.exports = class SkypeBot {
                                     })
                                     .catch(error =>{
                                         console.log('ERROR:', error);
-                                        this.doRichContentResponse(session,'Désolé il y a quelque chose qui marche pas, veuillez regarder la log de serveur ');
+                                        this.doRichContentResponse(session,config.messageServeurErrer);
                                     });
                             } else if (intentName==="date"){
-                                let jalon;
-                                let projet;
                                 let jalon1 = response.result.parameters.d1;
                                 let jalon2 = response.result.parameters.d2;
                                 let jalon3 = response.result.parameters.d3;
@@ -288,13 +286,9 @@ module.exports = class SkypeBot {
                                     })
                                     .catch(error =>{
                                         console.log('ERROR:', error);
-                                        this.doRichContentResponse(session,'Désolé il y a quelque chose qui marche pas, veuillez regarder la log de serveur ');
+                                        this.doRichContentResponse(session,config.messageServeurErrer);
                                     });
                             } else if (intentName==="insert" && role){
-                                let projet;
-                                let fonction;
-                                let personne;
-                                let text='';
                                 let projet1=response.result.parameters.projet1;
                                 let projet2=response.result.parameters.projet2;
                                 let projet3=response.result.parameters.projet3;
@@ -326,11 +320,9 @@ module.exports = class SkypeBot {
                                 } else {
                                     db.any(`SELECT personne FROM projet WHERE projet='${projet}' AND fonction='${fonction}' AND personne='${personne}'`)
                                         .then(data2 =>{
-                                          console.log(data2);
                                             for (var i in data2){
                                                 text=data2[i].personne;
                                             }
-                                            console.log(text);
                                             if(text===''){
                                                 db.any(`INSERT INTO projet (projet,fonction,personne) VALUES ('${projet}','${fonction}','${personne}')`)
                                                     .then(data=>{
@@ -338,23 +330,20 @@ module.exports = class SkypeBot {
                                                     })
                                                     .catch(error =>{
                                                         console.log('ERROR:', error);
-                                                        this.doRichContentResponse(session,'Désolé il y a quelque chose qui marche pas, veuillez regarder la log de serveur ');
+                                                        this.doRichContentResponse(session,config.messageServeurErrer);
                                                     });
                                             } else{
-                                                this.doRichContentResponse(session,'Les données existent deja dans la base');
+                                                this.doRichContentResponse(session,config.messageDoneesExistent);
                                             }
                                         })
                                         .catch(error =>{
                                             console.log('ERROR:', error);
-                                            this.doRichContentResponse(session,'Désolé il y a quelque chose qui marche pas, veuillez regarder la log de serveur ');
+                                            this.doRichContentResponse(session,config.messageServeurErrer);
                                         })
                                 }
                             } else if (intentName==='insert' && !role){
                                  this.doRichContentResponse(session,config.messageAccess);
                             } else if (intentName==='delete' && role){
-                                 let projet;
-                                 let personne;
-                                 let fonction;
                                  let projet1=response.result.parameters.projet1;
                                  let projet2=response.result.parameters.projet2;
                                  let projet3=response.result.parameters.projet3;
@@ -382,36 +371,35 @@ module.exports = class SkypeBot {
                                  projet=projet.toLowerCase();
                                  fonction=fonction.toLowerCase();
                                  if (fonction==="" && personne===" "){
-                                     console.log('prpr',projet);
                                      db.any(`DELETE FROM projet WHERE projet='${projet}'`)
                                          .then(data=>{
                                              this.doRichContentResponse(session,responseText);
                                          })
                                          .catch(error=>{
                                              console.log('ERROR:',error);
-                                             this.doRichContentResponse(session,'Désolé il y a quelque chose qui marche pas, veuillez regarder la log de serveur ');
+                                             this.doRichContentResponse(session,config.messageServeurErrer);
                                          });
                                  } else if (fonction===""){
-                                     console.log('ppp',personne);
                                      db.any(`DELETE FROM projet WHERE projet='${projet}' AND personne='${personne}'`)
                                          .then(data=>{
                                               this.doRichContentResponse(session,responseText);
                                          })
                                          .catch(error=>{
                                               console.log('ERROR:',error);
-                                              this.doRichContentResponse(session,'Désolé il y a quelque chose qui marche pas, veuillez regarder la log de serveur ');
+                                              this.doRichContentResponse(session,config.messageServeurErrer);
                                          });
                                  } else {
-                                     console.log('fff',fonction);
                                      db.any(`DELETE FROM projet WHERE projet='${projet}' AND fonction='${fonction}' AND personne='${personne}'`)
                                         .then(data=>{
                                             this.doRichContentResponse(session,responseText);
                                         })
                                         .catch(error=>{
                                             console.log('ERROR:',error);
-                                            this.doRichContentResponse(session,'Désolé il y a quelque chose qui marche pas, veuillez regarder la log de serveur ');
+                                            this.doRichContentResponse(session,config.messageServeurErrer);
                                         })
                                  }
+                            } else if (intentName==='delete' && !role){
+                                 this.doRichContentResponse(session,config.messageAccess);
                             } else if (intentName==='fuck'){
 
                             } else if (SkypeBot.isDefined(responseText)) {
@@ -426,7 +414,7 @@ module.exports = class SkypeBot {
                     })
                     .catch(error =>{
                         console.log('ERROR1:', error);
-                        this.doRichContentResponse(session,'Désolé il y a quelque chose qui marche pas, veuillez regarder la log de serveur ');
+                        this.doRichContentResponse(session,config.messageServeurErrer);
                     });
 
 
