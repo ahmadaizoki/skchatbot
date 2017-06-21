@@ -361,7 +361,7 @@ module.exports = class SkypeBot {
                                           this.doRichContentResponse(session,responseText);
                                      })
                                      .catch(error=>{
-                                          console.log('ERROR':,error);
+                                          console.log('ERROR:',error);
                                           this.doRichContentResponse(session,'Désolé il y a quelque chose qui marche pas, veuillez regarder la log de serveur ');
                                      });
                             } else if (intentName==='fuck'){
