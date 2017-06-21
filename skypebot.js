@@ -391,7 +391,7 @@ module.exports = class SkypeBot {
                                              console.log('ERROR:',error);
                                              this.doRichContentResponse(session,'Désolé il y a quelque chose qui marche pas, veuillez regarder la log de serveur ');
                                          });
-                                 } else if (fonction===""){
+                                 } else if (fonction==="" $$ personne !==""){
                                      console.log('ppp',personne);
                                      db.any(`DELETE FROM projet WHERE projet='${projet}' AND personne='${personne}'`)
                                          .then(data=>{
