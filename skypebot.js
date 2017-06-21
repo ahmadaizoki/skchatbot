@@ -381,7 +381,7 @@ module.exports = class SkypeBot {
                                  personne=personne.toLowerCase();
                                  projet=projet.toLowerCase();
                                  fonction=fonction.toLowerCase();
-                                 if (fonction==="" && personne===""){
+                                 if (fonction==="" && personne===" "){
                                      console.log('prpr',projet);
                                      db.any(`DELETE FROM projet WHERE projet='${projet}'`)
                                          .then(data=>{
@@ -391,7 +391,7 @@ module.exports = class SkypeBot {
                                              console.log('ERROR:',error);
                                              this.doRichContentResponse(session,'Désolé il y a quelque chose qui marche pas, veuillez regarder la log de serveur ');
                                          });
-                                 } else if (fonction==="" && personne !==""){
+                                 } else if (fonction===""){
                                      console.log('ppp',personne);
                                      db.any(`DELETE FROM projet WHERE projet='${projet}' AND personne='${personne}'`)
                                          .then(data=>{
