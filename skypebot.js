@@ -284,7 +284,7 @@ module.exports = class SkypeBot {
                                     .catch(error =>{
                                         console.log('ERROR:', error);
                                     });
-                            } else if (intentName==="insert"){
+                            } else if (intentName==="insert" && role){
                                 let projet;
                                 let fonction;
                                 let personne;
@@ -335,12 +335,14 @@ module.exports = class SkypeBot {
                                             console.log('ERROR:', error);
                                         })
                                 }
+                            } else if (intentName==='insert' && !role){
+                                 this.doRichContentResponse(session,config.messageAccess);
                             } else if (intentName==='fuck'){
 
                             } else if (SkypeBot.isDefined(responseText)) {
-                                this.doRichContentResponse(session,responseText);
+                                 this.doRichContentResponse(session,responseText);
                             } else {
-                                console.log(sender, 'Recevoir message vide');
+                                 console.log(sender, 'Recevoir message vide');
                             }
                         } else {
                             console.log(sender, 'Recevoir resulta vide');
