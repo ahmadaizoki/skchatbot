@@ -326,7 +326,6 @@ module.exports = class SkypeBot {
                                             }
                                             console.log(text);
                                             if(text===''){
-                                                this.doRichContentResponse(session,'Les données existent deja dans la base');
                                                 db.any(`INSERT INTO projet (projet,fonction,personne) VALUES ('${projet}','${fonction}','${personne}')`)
                                                     .then(data=>{
                                                         this.doRichContentResponse(session,responseText);
