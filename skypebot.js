@@ -288,6 +288,7 @@ module.exports = class SkypeBot {
                                 let projet;
                                 let fonction;
                                 let personne;
+                                let text;
                                 let projet1=response.result.parameters.projet1;
                                 let projet2=response.result.parameters.projet2;
                                 let projet3=response.result.parameters.projet3;
@@ -317,11 +318,13 @@ module.exports = class SkypeBot {
                                 if (personne==="" || fonction==="" || projet===""){
                                     this.doRichContentResponse(session,config.messageError);
                                 } else {
-                                    db.any(`SELECT projet,personne FROM projet WHERE projet='${projet}' AND fonction='${fonction}' AND personne='${personne}'`)
+                                    db.any(`SELECT personne FROM projet WHERE projet='${projet}' AND fonction='${fonction}' AND personne='${personne}'`)
                                         .then(data2 =>{
-                                            if(data2!==''){
-                                                this.doRichContentResponse(session,'Les données existent deja dans la base')
-                                            }else{
+                                            for (var i in data2){
+                                                text=data2[i].personne;
+                                            }
+                                            if(text===''){
+                                                this.doRichContentResponse(session,'Les données existent deja dans la base');
                                                 db.any(`INSERT INTO projet (projet,fonction,personne) VALUES ('${projet}','${fonction}','${personne}')`)
                                                     .then(data=>{
                                                         this.doRichContentResponse(session,responseText);
@@ -329,6 +332,8 @@ module.exports = class SkypeBot {
                                                     .catch(error =>{
                                                         console.log('ERROR:', error);
                                                     });
+                                            } else{
+                                                this.doRichContentResponse(session,'Les données existent deja dans la base');
                                             }
                                         })
                                         .catch(error =>{
