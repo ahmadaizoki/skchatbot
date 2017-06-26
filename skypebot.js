@@ -250,12 +250,12 @@ module.exports = class SkypeBot {
                                         this.doRichContentResponse(session,config.messageServeurErrer);
                                     });
                             } else if (intentName==="date"){
-                                let jalon1 = response.result.parameters.d1;
-                                let jalon2 = response.result.parameters.d2;
-                                let jalon3 = response.result.parameters.d3;
-                                let projet1 = response.result.parameters.na1;
-                                let projet2 = response.result.parameters.na2;
-                                let projet3 = response.result.parameters.na3;
+                                let jalon1 = response.result.parameters.date1;
+                                let jalon2 = response.result.parameters.date2;
+                                let jalon3 = response.result.parameters.date3;
+                                let projet1 = response.result.parameters.nom1;
+                                let projet2 = response.result.parameters.nom2;
+                                let projet3 = response.result.parameters.nom3;
                                 if (jalon2 === "" && jalon3 === "") {
                                     jalon = jalon1;
                                 } else if (jalon3 === "") {
