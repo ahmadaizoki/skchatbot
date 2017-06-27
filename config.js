@@ -5,7 +5,7 @@ module.exports={
     APP_SECRET:"dDyoxh9pDoScyJt5fWcbNd5",
     selectAll:'SELECT * FROM projet',
     messageAccess:"Vous n'avez pas les droits de completer cet action!",
-    messageError:"Je crois que tu t'es troumbé!",
+    messageError:"Je crois que tu t'es trompé!",
     messageServeurErrer:"Désolé il y a quelque chose qui marche pas, veuillez regarder la log de serveur !",
     messageDoneesExistent:"Les données existent deja dans la base",
 }
