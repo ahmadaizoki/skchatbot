@@ -306,7 +306,7 @@ module.exports = class SkypeBot {
                                         this.doRichContentResponse(session,config.messageServeurErrer);
                                     });
                             }
-                            //Ajoute une valeure dans la table prjet
+                            //Ajoute une valeure dans la table projet
                              else if (intentName==="insert" && role){
                                 let projet1=response.result.parameters.projet1;
                                 let projet2=response.result.parameters.projet2;
