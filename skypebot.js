@@ -104,6 +104,7 @@ module.exports = class SkypeBot {
                 if (this._botConfig.devConfig) {
                     console.log(sender, "Recevoir api.ai reponse");
                 }
+                //verifier l'autorisation
                 db1.any(`SELECT name,role FROM role WHERE name='${username}'`)
                     .then(data1=>{
                         let role;
@@ -112,6 +113,7 @@ module.exports = class SkypeBot {
                         }catch (e) {
                             role="";
                         }
+                        //Si le bot a compris la demande
                         if (SkypeBot.isDefined(response.result) && SkypeBot.isDefined(response.result.fulfillment)) {
                             let responseText = response.result.fulfillment.speech;
                             let responseMessages = response.result.fulfillment.messages;
@@ -122,8 +124,11 @@ module.exports = class SkypeBot {
                             let fonction;
                             let personne;
                             let jalon;
+                            let doc;
+                            let sujet;
 
                             //Traiter la reponse pour chaque intent dans l'api.ai
+                            //Demande un nom.
                             if(intentName==="projet_fonction") {
                                 let fonction1 = response.result.parameters.fonction1;
                                 let fonction2 = response.result.parameters.fonction2;
@@ -164,7 +169,9 @@ module.exports = class SkypeBot {
                                         console.log('ERROR:', error);
                                         this.doRichContentResponse(session,config.messageServeurErrer);
                                     });
-                            } else if(intentName==="projet"){
+                            }
+                            //Demande les personnes qui travaillent sur un projet et ces fonctions
+                            else if(intentName==="projet"){
                                 let projet1=response.result.parameters.projet1;
                                 let projet2=response.result.parameters.projet2;
                                 let projet3=response.result.parameters.projet3;
@@ -191,7 +198,9 @@ module.exports = class SkypeBot {
                                         console.log('ERROR:', error);
                                         this.doRichContentResponse(session,config.messageServeurErrer);
                                     });
-                            } else if (intentName==="personne"){
+                            }
+                            //Demande le role d'un personne
+                             else if (intentName==="personne"){
                                 let prenom=response.result.parameters.prenom1;
                                 let nom=response.result.parameters.nom1;
                                 personne=prenom+" "+nom;
@@ -211,7 +220,9 @@ module.exports = class SkypeBot {
                                         console.log('ERROR:', error);
                                         this.doRichContentResponse(session,config.messageServeurErrer);
                                     });
-                            } else if (intentName==="list" && role) {
+                            }
+                            //Afficher les données dans la table projet
+                            else if (intentName==="list" && role) {
                                 let table=response.result.parameters.table1;
                                 table=table.toLowerCase();
                                 db.any(config.selectAll)
@@ -229,9 +240,13 @@ module.exports = class SkypeBot {
                                         console.log('ERROR:', error);
                                         this.doRichContentResponse(session,config.messageServeurErrer);
                                     });
-                            } else if(intentName==="list" && !role){
+                            }
+                            //Si je suis pas un admin
+                            else if(intentName==="list" && !role){
                                 this.doRichContentResponse(session,config.messageAccess);
-                            } else if (intentName==="signifie"){
+                            }
+                            //Demande d'un signifie
+                            else if (intentName==="signifie"){
                                 let syno=response.result.parameters.syno1;
                                 syno=syno.toLowerCase();
                                 db.any(`SELECT def FROM synonyme WHERE synonyme='${syno}'`)
@@ -249,7 +264,9 @@ module.exports = class SkypeBot {
                                         console.log('ERROR:', error);
                                         this.doRichContentResponse(session,config.messageServeurErrer);
                                     });
-                            } else if (intentName==="date"){
+                            }
+                            //Demande une date
+                            else if (intentName==="date"){
                                 let jalon1 = response.result.parameters.date1;
                                 let jalon2 = response.result.parameters.date2;
                                 let jalon3 = response.result.parameters.date3;
@@ -288,7 +305,9 @@ module.exports = class SkypeBot {
                                         console.log('ERROR:', error);
                                         this.doRichContentResponse(session,config.messageServeurErrer);
                                     });
-                            } else if (intentName==="insert" && role){
+                            }
+                            //Ajoute une valeure dans la table prjet
+                             else if (intentName==="insert" && role){
                                 let projet1=response.result.parameters.projet1;
                                 let projet2=response.result.parameters.projet2;
                                 let projet3=response.result.parameters.projet3;
@@ -341,9 +360,13 @@ module.exports = class SkypeBot {
                                             this.doRichContentResponse(session,config.messageServeurErrer);
                                         })
                                 }
-                            } else if (intentName==='insert' && !role){
+                            }
+                            //Si je suis pas un admin
+                             else if (intentName==='insert' && !role){
                                  this.doRichContentResponse(session,config.messageAccess);
-                            } else if (intentName==='delete' && role){
+                            }
+                            //Delete une valeure dans la table projet
+                             else if (intentName==='delete' && role){
                                  let projet1=response.result.parameters.projet1;
                                  let projet2=response.result.parameters.projet2;
                                  let projet3=response.result.parameters.projet3;
@@ -398,11 +421,53 @@ module.exports = class SkypeBot {
                                             this.doRichContentResponse(session,config.messageServeurErrer);
                                         })
                                  }
-                            } else if (intentName==='delete' && !role){
+                            }
+                            //Si je suis pas un admin
+                             else if (intentName==='delete' && !role){
                                  this.doRichContentResponse(session,config.messageAccess);
-                            } else if (intentName==='fuck'){
-
-                            } else if (SkypeBot.isDefined(responseText)) {
+                            }
+                            //Demande une documentation
+                            else if (intentName==='documentation'){
+                                  doc=response.result.parameters.doc1;
+                                  doc=doc.toLowerCase();
+                                  db.any(`SELECT chemin FROM doc WHERE nom='${doc}'`)
+                                      .then(data=>{
+                                          for (var i in data){
+                                              text=text+data[i].chemin;
+                                          }
+                                          if(text===''){
+                                              this.doRichContentResponse(session,config.messageError);
+                                          }else{
+                                              this.doRichContentResponse(session,text);
+                                          }
+                                      })
+                                      .catch(error=>{
+                                          console.log('ERROR:',error);
+                                          this.doRichContentResponse(session,config.messageServeurErrer);
+                                      })
+                            }
+                            //Demande la referents sur un sujet
+                            else if(intentName==='referents'){
+                                sujet=response.result.parameters.sujet1;
+                                sujet=sujet.toLowerCase();
+                                do.any(`SELECT contact FROM referents WHERE sujet='${sujet}'`)
+                                    .then(data=>{
+                                        for(var i in data){
+                                            text=text+data[i].contact;
+                                        }
+                                        if(text===''){
+                                            this.doRichContentResponse(session,config.messageError);
+                                        }else{
+                                            this.doRichContentResponse(session,text);
+                                        }
+                                    })
+                                    .catch(error=>{
+                                        console.log('ERROR:',error);
+                                        this.doRichContentResponse(session,config.messageServeurErrer);
+                                    })
+                            }
+                            //Si api.ai a compris la demande
+                             else if (SkypeBot.isDefined(responseText)) {
                                  this.doRichContentResponse(session,responseText);
                             } else {
                                  console.log(sender, 'Recevoir message vide');
