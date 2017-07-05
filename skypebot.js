@@ -446,7 +446,7 @@ module.exports = class SkypeBot {
                                           this.doRichContentResponse(session,config.messageServeurErrer);
                                       })
                             }
-                            //Demande la referents sur un sujet
+                            //Demande les referents sur un sujet
                             else if(intentName==='referents'){
                                 sujet=response.result.parameters.sujet1;
                                 sujet=sujet.toLowerCase();
