@@ -450,7 +450,7 @@ module.exports = class SkypeBot {
                             else if(intentName==='referents'){
                                 sujet=response.result.parameters.sujet1;
                                 sujet=sujet.toLowerCase();
-                                do.any(`SELECT contact FROM referents WHERE sujet='${sujet}'`)
+                                db.any(`SELECT contact FROM referents WHERE sujet='${sujet}'`)
                                     .then(data=>{
                                         for(var i in data){
                                             text=text+data[i].contact;
