@@ -10,8 +10,7 @@ var options = {
 };
 var pgp = require('pg-promise')(options);  //pour se connecter a la base de données
 var pgp1=require('pg-promise')(options);  //pour se connecter a la base de données
-var db=pgp(process.env.DATABASE_URL);  //se connecter a la base de données
-var db1=pgp1(process.env.DATABASE_URL);  //se connecter a la base de données
+var db=pgp(config.connectBD);  //se connecter a la base de données
 
 module.exports = class SkypeBot {
 
@@ -105,7 +104,7 @@ module.exports = class SkypeBot {
                     console.log(sender, "Recevoir api.ai reponse");
                 }
                 //verifier l'autorisation
-                db1.any(`SELECT name,role FROM role WHERE name='${username}'`)
+                db.any(`SELECT name,role FROM role WHERE name='${username}'`)
                     .then(data1=>{
                         let role;
                         try{

@@ -8,4 +8,5 @@ module.exports={
     messageError:"Je crois que tu t'es trompé!",
     messageServeurErrer:"Désolé il y a quelque chose qui marche pas, veuillez regarder la log de serveur !",
     messageDoneesExistent:"Les données existent deja dans la base",
+    connectBD:"postgres://uhomaprcycqhwd:7d0d146ab4a01f80e6829a1ab29b494e222d96aa8dd4255f6498a26b2f171cba@ec2-54-217-222-254.eu-west-1.compute.amazonaws.com:5432/d3o37eogvmdfdn",
 }
